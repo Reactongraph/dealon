@@ -1,0 +1,100 @@
+{
+  "app":{
+    "store_name" : "Mobikul-EN",
+    "app_name" : "Supplier App"
+  },
+    "login": {
+      "welcome": "Welcome {{name}} to our localized app!",
+      "login_button": "Login",
+      "signup_button": "Sign Up",
+      "user_name_email" :"User Name/Email",
+      "email":"Email",
+      "reset_password":"RESET PASSWORD",
+      "password":"Password",
+      "save_profile":"SAVE PROFILE",
+      "confirm_password" : "Confirm Password",
+      "forgot_password":"Forgot Password",
+      "ask_for_forgot_password":"Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.",
+      "email_error":"Please enter a valid email"
+    },
+    "home":{
+       "orders":"Orders",
+       "order_status":"Order Status",
+       "invoices":"Invoices"
+    },
+    "language":{
+      "select_language":"Select Language",
+      "arabic":"Arabic",
+      "english":"English",
+      "urdu":"Urdu"
+    },
+    "user_profile": {
+      "title": "Your Profile",
+      "empty_message" : "No new product found yet !!!",
+      "no_more_message" : "No more product found !!!",
+      "search_your_product":"Search Product"
+    },
+    "new_order":{
+      "title" : "New Orders",
+      "qty" : "Qty",
+      "qty_box" : "Qty of box",
+      "price" : "Price per box",
+      "price_qty_error" : "Price and Quantity is required",
+      "empty_message" : "No new order found yet !!!",
+      "no_more_message" : "No more order found !!!"
+    },
+    "invoice":{
+      "title" : "Invoice",
+      "qty" : "Qty",
+      "price" : "Price",
+      "amount":"Amount",
+      "quote_id":"Quote Id",
+      "date":"Date",
+      "status":"Status",
+      "empty_message" : "No invoice found yet !!!",
+      "no_more_message" : "No more invoices found !!!"
+    },
+    "quote_dialog":{
+      "title" : "Filter by Quote Id",
+      "enter_quote_id" : "Enter quote id",
+      "apply": "Apply"
+    },
+    "invoice_detail" :{
+      "title" : "Invoice Detail",
+      "prev_status":"Old Status",
+      "new_status":"New Status",
+      "empty_message" : "No message found yet !!!",
+      "no_more_message" : "No more message found !!!",
+      "message": "Message",  
+      "messages": "Messages"
+    },
+    "order_status":{
+      "title" : "Order Status",
+      "empty_message" : "No order status found yet !!!",
+      "no_more_message" : "No more order status found !!!"
+    },
+    "messages":{
+      "is_required_field" : "is required field",
+      "confirm_password_error" : "Password and Confirm Password should be match",
+      "oops": "Oops!!",
+      "server_maintenance" : "Server Under Maintenance",
+      "cancel" : "Cancel",
+      "retry": "Retry",      
+      "network_error": "NETWORK ERROR",
+      "please_wait":"Please wait",
+      "loading" : "Loading...",
+      "warning":"Warning",
+      "ask_logout_msg" : "Do you want to logout?",
+      "yes":"YES",
+      "exit_app_msg":"Press again to exit from app"
+    },
+    "camera":{
+      "select_choice" : "Select Choice",
+      "gallery":"Gallery",
+      "camera":"Camera"
+    },
+    "extra":{
+      "space" : " ",
+      "colon":": "
+    }
+  }

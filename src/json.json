@@ -1,0 +1,21 @@
+{
+    "product_list": [
+        {
+            "image": "https://dealon.uk/wp-content/uploads/woocommerce-placeholder.png",
+            "isFav": "true",
+            "name": "test-cloth",
+            "price": "£10.00 – £40.00",
+            "regular_price": "",
+            "stock_status": "instock"
+        },
+        {
+            "image": "https://dealon.uk/wp-content/uploads/2021/03/hoodies-1-3x1.5.jpg",
+            "isFav": "true",
+            "name": "rochie",
+            "price": "£10.00 – £15.00",
+            "regular_price": "",
+            "stock_status": "instock"
+        }
+    ],
+    "success": true
+}

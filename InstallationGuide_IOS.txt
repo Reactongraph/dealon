@@ -1,0 +1,72 @@
+/*
+ *
+ * Webkul Software.
+ *
+ * @category  Configuration Guide
+ * @package   Mobikul iOS
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2018 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+Scope : This document aims to provide assistance to new developers so that they can configure the application from the Raw Source Code.
+
+Basic Requirements : 
+    *) Node version: v10.11.0 && npm: 6.4.1, (MAX & MIN)
+    *) react-native version 0.60.5
+    *) watchman for clear cache
+    *) MAC, X-code (11.2.1)
+    *) Visual Studio Code (for react native code editing)
+    *) Raw Source Code ( extracted from  Zip files)
+    *) Internet Connection( so that Visual-Studio/XCODE can download the needed packages)
+    *) A Valid backend url of the framework(like WooCommerce, WooCommerce MarketPlace) with Mobikul module installed and working
+    *) Image files as per the prerequisite file of the framework(Some of the information varies from framework to framework)
+    
+
+ SOME IMPORTANT BLOG LINK FOR BASIC SETUP && clear cache 
+      1. https://mobikul.com/setup-react-native/
+      2. https://mobikul.com/clear-caching-on-react-native-app/ 
+      3. https://facebook.github.io/react-native/docs/0.60/getting-started
+
+----------------------------------------END of Basic Requirement-------------------------------------------------------------------
+
+Procedure to Follow : 
+          Please verify basic requirement is fullfill.
+
+      -------------------------- Configuration Steps -------------------------------------------------------
+
+    1) Import the extracted source code into your project.
+        For this, you will need to click on File --> Import Project --> Select the path to your Extracted Code.
+    2) Open it on visual studio code.
+    3) run following commands on terminal from project home path
+        -> npm install  
+       (clear cache commands )
+        -> MPDIR/react-*; rm -rf $TMPDIR/haste-*; rm -rf $TMPDIR/metro-*; watchman watch-del-all        
+        -> react-native start --reset-cache
+
+        (pod install for ios)
+         -> go to ios and run -> pod install
+
+    4) Open MobikulWooCommerceMarketplace.xcworkspace (from iOS folder) on x-code and run ios Application.
+
+    If you face any issue in this, immediately contact your senior developer, don't just try your own manipulations
+
+    Updation for API
+    ->> GOTO AppConstant.js file from Folder **src/app_constant** - Write here your `BASE_URL`,` API_USER_NAME`,
+    'API_PASSWORD`
+    ->> GOTO ThemeConstant.js file from **src/app_constant** and change Theme Color
+       1. PRIMARY_COLOR: '#FFFFFF',
+       2. DARK_PRIMARY_COLOR: "rgba(0, 0, 0, 0.2)" ,
+       3. SECONDARY_COLOR: 'rgb(238, 167, 2)',
+       4. ACCENT_COLOR: '#824171', 
+  ------------------------------------------------- Configuration Completed -------------------------------------------------------------------
+
+Note- We are not responsible for the isuue on any updation of source code. 
+
+------------------------------------------------- END OF DOCUMENT -------------------------------------------------------------------
+
+
+Thanks.
+
+Mobikul Developer
+

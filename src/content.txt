@@ -1,0 +1,37 @@
+
+WooCommerce Marketplace Mobile App is an app that will convert your Wordpress Woocommerce Marketplace into an app which will work on React Native.
+
+React Native allows the creation of the app by using Javascript only. By revoking the requirement of any additional programming language like Kotline, Java and Other Languages. 
+
+With the growth in industrial demand, the trend of e-commerce industry is moving from a single store and its owner to a marketplace structure. Where there are multiple sellers dealing with the customer.
+
+To add to this advancement we have developed an app that will make the marketplace store accessible from anywhere and anytime.
+
+This app will allow the customer to order the products from the app and seller to manage the store.
+
+The app gives various features that make the app the best choice for the store owner to increase sales-
+
+    Seller Profile Management.
+
+    Sellers transaction management.
+
+    Sellers orders management.
+
+    Seller communication with admin via app messages.
+
+    Customer Marketplace view.
+
+    Customer Product Ordering.
+
+    Customer Profile Management by editing the address details, account details.
+
+    The customer can view the orders.
+
+    Uniform and Rich mobile UI.
+
+So its time to upgrade the store from website to a much accessible app on react native.
+
+For the customization of this app drop us a mail at or click support@webkul.com.  
+
+Website URL - http://wordpressdemo.webkul.com/woocommerce-mp-api
+Admin URL - http://wordpressdemo.webkul.com/woocommerce-mp-api/wp-admin

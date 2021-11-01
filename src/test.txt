@@ -1,0 +1,25 @@
+
+  error: bundling failed: Error: While trying to resolve module `react-native-toasty` 
+  from file `/Users/teamreact/Desktop/demo/mobikul-react-native-woocommerse/src/utility/Helper.js`, 
+  the package `/Users/teamreact/Desktop/demo/mobikul-react-native-woocommerse/node_modules/react-native-toasty/package.json` 
+  was successfully found. However, this package itself specifies a `main` module field that could not be resolved 
+  (`/Users/teamreact/Desktop/demo/mobikul-react-native-woocommerse/node_modules/react-native-toasty/js/RNToasty.js`. Indeed, none of these files exist:
+  
+  /Users/teamreact/Desktop/demo/mobikul-react-native-woocommerse/node_modules/react-native-toasty/js/RNToasty.js(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json|.ios.ts|.native.ts|.ts|.ios.tsx|.native.tsx|.tsx)`
+  * `/Users/teamreact/Desktop/demo/mobikul-react-native-woocommerse/node_modules/react-native-toasty/js/RNToasty.js/index(.native||.ios.js|.native.js|.js|.ios.json|.native.json|.json|.ios.ts|.native.ts|.ts|.ios.tsx|.native.tsx|.tsx)
+
+
+
+Git Command- 
+  https://stackoverflow.com/questions/20568971/git-pull-keeps-telling-me-to-stash-local-changes-before-pulling
+
+java -jar bundletool.jar build-apks --bundle=app.aab --output=my_app.apks
+
+java -jar bundletool.jar install-apks --apks=my_app.apks
+
+
+113->fixed  396, 398, 147, verify Google login/ facebooklogin.
+
+D7:22:2D:8C:BC:62:19:1F:88:2E:A8:A5:17:37:4A:72:4B:86:C0:9F
+5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+E1:71:68:21:49:1D:8E:46:2C:C4:55:93:15:2A:46:AD:93:1B:5A:04

@@ -1,0 +1,10 @@
+Update All App with new Theme.
+Add Notification Page.
+Add view all feature on Feature Product, New Product on Home Page.
+Implement SubCategory Page.
+Add Website Url Links such as Privacy Policy, About Shop etc.
+Implement offline mode.
+Implement offline cart.
+Fixed some issues. 
+
+cd 

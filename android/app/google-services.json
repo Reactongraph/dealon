@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "796509388069",
+    "project_id": "dealon-56d98",
+    "storage_bucket": "dealon-56d98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796509388069:android:ed4f917f6a5dc60b9e6ecc",
+        "android_client_info": {
+          "package_name": "app.dealon.uk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796509388069-ee1oa10gqumrp55kqk2j22e9a67thnrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpCdHmYl-9PL-CMJwyaR2qybK-yodIKhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796509388069-ee1oa10gqumrp55kqk2j22e9a67thnrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:796509388069:android:0a2c246e1434fafa9e6ecc",
+        "android_client_info": {
+          "package_name": "com.dealon.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "796509388069-ee1oa10gqumrp55kqk2j22e9a67thnrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpCdHmYl-9PL-CMJwyaR2qybK-yodIKhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "796509388069-ee1oa10gqumrp55kqk2j22e9a67thnrc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
