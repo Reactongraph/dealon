@@ -765,10 +765,10 @@ export default class ProductPage extends React.Component {
                           numberOfLines={1}>
                           {this.state.selectedVariation
                             ? (this.state.selectedVariation.backordered || this.state.selectedVariation.stock_quantity > 0)
-                              ? strings("INSTOCK")
+                              ? this.state.product?.stock + strings("INSTOCK")
                               : strings("OUT_OF_STOCK")
                             : (this.state.product.manage_stock !="yes" || stringToNumber(this.state.product.stock) > 0)
-                            ? strings("INSTOCK")
+                            ? this.state.product?.stock + strings("INSTOCK")
                             : strings("OUT_OF_STOCK")}
                         </Text>
                       ) : null}
@@ -1193,7 +1193,7 @@ export default class ProductPage extends React.Component {
                   </ScrollView>
                 </View>
 
-                {this.state.product.product_type != 'external' ? (
+                {(this.state.product.product_type != 'external' && this.state.product.seller_id != this.userId )? (
                   <View
                     style={[{
                       flexDirection: 'row',

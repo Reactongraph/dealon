@@ -179,7 +179,7 @@
   "MANAGE_STOCK" : "Manage Stock",
   "ENABLE_STOCK_LABEL_MSG" : "Enable stock management at product level",
   "STOCK_QTY" : "Stock Qty",
-  "ALLOW_BACK_ORDER" : "Allow Backorders",
+  "ALLOW_BACK_ORDER" : "Product Returns",
   "STOCK_STATUS" : "Stock Status",
   "WEIGHT" : "Weight (kg)",
   "DIMENTIONS" : "Dimensions (cm)",
