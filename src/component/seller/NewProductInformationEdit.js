@@ -336,6 +336,22 @@ export default class NewProductInformationEdit extends React.Component {
             </View>
 
             <Text style={styles.headingTextStyle}>
+              {strings("PRODUCT_VIDEO")}
+            </Text>
+            <TextInput
+              style={ViewStyle.inputTextStyle}
+              autoCapitalize="none"
+              // autoCorrect={false}
+              // value={this.state.salePrice}
+              // onChangeText={(text) => {
+              //   this.setState({ salePrice: onlyDigitText(text) });
+              // }}
+              // keyboardType="number-pad"
+              returnKeyType="next"
+              placeholder={strings("PRODUCT_VIDEO")}
+            />
+
+            <Text style={styles.headingTextStyle}>
               {strings("PRODUCT_SKU")}
             </Text>
             <View style={ViewStyle.passInputViewStyle}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { Tabs, ScrollableTab, Tab, Container } from "native-base";
 import CustomActionbar from "../../container/CustomActionbar";
 import StringConstant from "../../app_constant/StringConstant";
@@ -441,6 +441,15 @@ export default class AddEditProduct extends React.Component {
                     statusValue={this.state.response.status}
                     isGetProductInfoData={this.state.isGetProductInfoData}
                   />
+                </Tab>
+                <Tab
+                  heading={strings("PRODUCT_AUCTION")}
+                  tabStyle={styles.tabStyle}
+                  activeTabStyle={styles.activeTabStyle}
+                  textStyle={styles.textStyle}
+                  activeTextStyle={styles.activeTextStyle}
+                >
+                  <Text>Auction</Text>
                 </Tab>
               </Tabs>
             )}

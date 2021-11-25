@@ -174,6 +174,7 @@
     PRODUCT_THUMBNAIL : "Product Thumbnail",
     PRODUCT_SKU : "SKU",
     SKU_VALIDATION_ERROR: "Please validate SKU",
+    PRODUCT_VIDEO: "Product Video",
     REGULAR_PRICE :"Regular Price",
     SALE_PRICE : "Sale Price",
     PRODUCT_SHORT_DESCRIPTION :"DETAIL",
@@ -217,6 +218,7 @@
     PRODUCT_STATUS : "Product Status",
     ADD_PRODUCT_IMAGES : " Add product images",
     EDIT_INFO: "EDIT INFO",
+    PRODUCT_AUCTION: "Product Auction",
 
     //////// ProductPAGE ////////
     QUANTITY : "QUANTITY",

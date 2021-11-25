@@ -138,12 +138,14 @@ export default class SearchProductPage extends React.Component {
     });
   };
   _onPressSearchALL = () => {
-    if (!isStringEmpty(this.searchText)) {
-      this.props.navigation.navigate("CategoryProductPage", {
-        searchKey: this.searchText,
-        CATAGORY_PAGE: AppConstant.IS_SEARCH,
-        search_refresh : false
-      });
+    if (!isStringEmpty(this.searchText) && this.state.searchItems !==[]) {
+      this.props.navigation.navigate("ProductPage", {
+      productId: this.state.searchItems[0]?.id,
+      productName: this.state.searchItems[0]?.title,
+    });
+    this.setState({
+      searchItems: []
+    });
     } else {
       showErrorToast(strings("SEARCH_EMPTY_TEXT_ERROR"));
     }

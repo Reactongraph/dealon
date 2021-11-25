@@ -767,7 +767,7 @@ export default class ProductPage extends React.Component {
                             ? (this.state.selectedVariation.backordered || this.state.selectedVariation.stock_quantity > 0)
                               ? this.state.product?.stock + strings("INSTOCK")
                               : strings("OUT_OF_STOCK")
-                            : (this.state.product.manage_stock !="yes" || stringToNumber(this.state.product.stock) > 0)
+                            : ((this.state.product.manage_stock !="yes" || stringToNumber(this.state.product.stock) > 0) && this.state.product.in_stock === true && this.state.product.stock !=="" && this.state.product.stock !=="0")
                             ? this.state.product?.stock + strings("INSTOCK")
                             : strings("OUT_OF_STOCK")}
                         </Text>

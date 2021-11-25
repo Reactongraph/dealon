@@ -461,7 +461,15 @@ export default class ProductGeneralInfoEdit extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
-
+            <Text style={styles.headingTextStyle}>
+                {strings("PRODUCT_VIDEO")}
+            </Text>
+            <TextInput
+                style={ViewStyle.inputTextStyle}
+                autoCapitalize="none"
+                returnKeyType="next"
+                placeholder={strings("PRODUCT_VIDEO")}
+            />
             <Text style={styles.headingTextStyle}>
               {strings("PRODUCT_SKU")}
             </Text>
