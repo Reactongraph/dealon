@@ -29,8 +29,8 @@ export default {
     backgroundColor: colorPack.light,
     borderBottomWidth: 1,
     borderColor: colorPack.borderColor,
-    paddingLeft: 0,
-    paddingRight: 20,
+    paddingLeft: 8,
+    paddingRight: 8,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -42,7 +42,7 @@ export default {
     backgroundColor: colorPack.backgroundColor,
   },
   indicator: {
-    fontSize: 30,
+    fontSize: 25,
     color: colorPack.placeholderTextColor,
   },
   selectedItem: {
@@ -80,7 +80,8 @@ export default {
   inputGroup: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 16,
+    paddingLeft: 5,
+    paddingRight: 15,
     backgroundColor: colorPack.light,
   },
   dropdownView: {

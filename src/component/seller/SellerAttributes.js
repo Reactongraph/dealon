@@ -403,7 +403,7 @@ export default class SellerAttributes extends React.Component {
                 return (
                     <Animated.View key={key} style={[{ opacity: this.animatedValue, transform: [{ translateY: animationValue }] }]}>
                         {/* <Text style={styles.text}>Row {item.index}</Text> */}
-                        <View style={{ flexDirection: 'row' }}>
+                        <View>
 
                             <Picker
                                 mode="dropdown"
@@ -413,7 +413,7 @@ export default class SellerAttributes extends React.Component {
                                 onValueChange={text => {
                                     let { dropdowns, items } = this.state;
                                     dropdowns[item.index] = text;
-                                    this.setState({ items: [], textInputs: [] })
+                                    //this.setState({ items: [], textInputs: [] })
 
                                     console.log("check parent value >>>>> " + this.state.dropdowns[text])
 
@@ -463,10 +463,11 @@ export default class SellerAttributes extends React.Component {
                                     });
                                 }}  
                                 value={this.state.textInputs[item.index]}
+                                (this.state.items.length > 0 && this.state.valueArray.length == this.state.items.length)
                             /> */}
 
-                            <View style={{ flex: 1 }}>
-                                {this.state.items.length > 0 ?
+                            <View>
+                                {(this.state.items.length > 0 && this.state.items[key]) ?
                                 <MultiSelect
                                     hideTags
                                     items={this.state.items[item.index]}
@@ -545,7 +546,7 @@ export default class SellerAttributes extends React.Component {
                 return (
                     <View key={key} >
                         {/* <Text style={styles.text}>Row  {item.index}</Text> */}
-                        <View style={{ flexDirection: 'row' }}>
+                        <View>
 
 
                             <Picker
@@ -557,7 +558,7 @@ export default class SellerAttributes extends React.Component {
                                     let { dropdowns, items } = this.state;
                                     dropdowns[item.index] = text;
 
-                                    this.setState({ items: [], textInputs: [] })
+                                    //this.setState({ items: [], textInputs: [] })
 
                                     console.log("check parent value >>>>> " + text)
 
@@ -586,8 +587,8 @@ export default class SellerAttributes extends React.Component {
                                 })}
                             </Picker>
 
-                            <View style={{ flex: 1 }}>
-                            { this.state.items.length > 0 ?
+                            <View>
+                            { (this.state.items.length > 0 && this.state.items[key]) ?
                                 <MultiSelect
                                     hideTags
                                     items={this.state.items[item.index]}
@@ -788,7 +789,7 @@ const styles = StyleSheet.create({
         borderColor: ThemeConstant.ACCENT_COLOR,
         borderRadius: 20,
         borderWidth: 1,
-        alignSelf: 'flex-start',
+        //alignSelf: 'flex-start',
         padding: 10,
         marginTop: 10,
 
