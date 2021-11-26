@@ -41,6 +41,7 @@ import OrderPlaceMessagePage from "../component/OrderPlaceMessagePage";
 import SellerList from "../component/seller/SellerList";
 import SellerProfileView from "../component/seller/SellerProfileView";
 import CustomerProfile from "../container/CustomerProfile";
+import FilterproductScreen from "../component/FilterProduct";
 // /**
 // * Webkul Software.
 // *
@@ -415,6 +416,9 @@ const StackNavigator = createStackNavigator(
     },
     SearchProductPage :{
       screen:SearchProductPage
+    },
+    FiltersProduct:{
+      screen: FilterproductScreen,
     },
     ExternalLinks : {
        screen:ExternalLinks

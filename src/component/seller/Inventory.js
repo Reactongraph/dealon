@@ -21,7 +21,8 @@ export default class Inventory extends React.Component {
     backorderOptions: [],
     selectedBackorder: {},
     stockStatusOptions: [],
-    selectedStatus: {}
+    selectedStatus: {},
+    isFirst: false,
   };
   componentDidMount() {
     this.setState(
@@ -31,7 +32,7 @@ export default class Inventory extends React.Component {
           ? this.props.stockStatusOptions
           : [],
         isEnableBackOrder: this.props.manage_stock,
-        stockQuantity: this.props.stock_quantity ? this.props.stock_quantity + "": ""
+        stockQuantity: this.props.stock_quantity ? this.props.stock_quantity + "" : ""
       },
       () => this.updateinfoData()
     );
@@ -72,6 +73,7 @@ export default class Inventory extends React.Component {
 
   updateinfoData = () => {
     this.props.getInfoProductData({ response: this.state });
+
   };
 
   updateStockStatusOption = (options, value) => {
@@ -92,11 +94,29 @@ export default class Inventory extends React.Component {
     });
   };
 
+
+
   _selectStatus = status => {
+
+    if (status.title == "In Stock") {
+
+      console.log("check first value >>>> "+ this.state.isFirst)
+
+      if(this.state.isFirst){
+        this.setState({ stockQuantity: "1",isFirst:true })
+      }
+
+    }
+
+    if(status.title=="Out Of Stock"){
+      this.setState({ stockQuantity: "0" ,isFirst:true})
+    }
+
     this.setState(
       {
         selectedStatus: status
       },
+
       () => this.updateinfoData()
     );
   };
@@ -118,6 +138,16 @@ export default class Inventory extends React.Component {
       () => this.updateinfoData()
     );
   };
+
+
+  setValueSelected(status) {
+    console.log("check value status >>>> " + JSON.stringify(status))
+    if (status.title == "Out Of Stock") {
+      this.setState({ stockQuantity: "0" })
+    } else {
+      this.setState({ stockQuantity: "1" })
+    }
+  }
 
   render() {
     return (
@@ -150,7 +180,7 @@ export default class Inventory extends React.Component {
               value={this.state.stockQuantity}
               onChangeText={text => {
                 text = onlyDigitText(text).replace(".", "");
-                this.setState({ stockQuantity: text}, () =>
+                this.setState({ stockQuantity: text }, () =>
                   this.updateinfoData()
                 );
               }}
@@ -172,6 +202,7 @@ export default class Inventory extends React.Component {
               style={styles.pickerStyle}
             >
               {this.state.backorderOptions.map((option, i) => {
+
                 return (
                   <Picker.Item key={i} value={option} label={option.title} />
                 );
@@ -189,9 +220,14 @@ export default class Inventory extends React.Component {
           placeholder={strings("ALLOW_BACK_ORDER")}
           selectedValue={this.state.selectedStatus}
           onValueChange={this._selectStatus.bind(this)}
-          style={styles.pickerStyle}
-        >
+          style={styles.pickerStyle}>
+
+
+
           {this.state.stockStatusOptions.map((stock, i) => {
+
+
+
             return <Picker.Item key={i} value={stock} label={stock.title} />;
           })}
         </Picker>

@@ -17,6 +17,7 @@ import ProgressDialog from "../../container/ProgressDialog";
 import { showErrorToast, showSuccessToast } from "../../utility/Helper";
 import SellerLinkedProduct from "./SellerLinkedProduct";
 import { strings } from "../../localize_constant/I18";
+import SellerAttribute from "./SellerAttributes";
 
 export default class AddEditProduct extends React.Component {
   sellerId = 0;
@@ -36,7 +37,7 @@ export default class AddEditProduct extends React.Component {
     isLoading: true,
     isProgress: false,
     productInfo: {},
-    isGetProductInfoData: false
+    isGetProductInfoData: false,
   };
   componentWillUnmount() {
     isInComponent = false;
@@ -49,7 +50,7 @@ export default class AddEditProduct extends React.Component {
   }
   getProductDataFromAPI = () => {
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
     let url =
       AppConstant.BASE_URL +
@@ -57,54 +58,64 @@ export default class AddEditProduct extends React.Component {
       this.productId +
       "/?seller_id=" +
       this.sellerId;
-    fetchDataFromAPI(url, "GET", "", null).then(response => {
+    fetchDataFromAPI(url, "GET", "", null).then((response) => {
       if (isInComponent) {
         if (response && response.success != false) {
           this.setState({
             isLoading: false,
             response: response,
-            isMaintenance: false
+            isMaintenance: false,
           });
+
+          console.log(
+            "check selected attri >>>>> " +
+              JSON.stringify(this.state.response.attributes)
+          );
         } else {
           this.setState({
             isLoading: false,
-            isMaintenance: true
+            isMaintenance: true,
           });
         }
       }
     });
   };
-  _getProductInformation = productInfo => {
+  _getProductInformation = (productInfo) => {
     this.productInfomation = productInfo;
     // console.log("productInfo", productInfo);
   };
-  _getInvetoryInformation = inventoryInfo => {
+  _getInvetoryInformation = (inventoryInfo) => {
     this.inventoryInformation = inventoryInfo;
     // console.log("inventoryInfo", inventoryInfo);
   };
-  _getExternalLinkInformation = externalInfo => {
+  _getExternalLinkInformation = (externalInfo) => {
     this.externalInfomation = externalInfo;
     // console.log("externalInfo", externalInfo);
   };
-  _getproductStatusInformation = statusInfo => {
+  _getproductStatusInformation = (statusInfo) => {
     this.productStatusInformation = statusInfo;
     // console.log("statusInfo", statusInfo);
   };
-  _getproductShippingInfo = shippingInfo => {
+  _getproductShippingInfo = (shippingInfo) => {
     this.shippingInfomation = shippingInfo;
     // console.log("shippingInfomation", shippingInfo);
   };
-  _getLinkProductInfo = linkProductInfo => {
+  _getLinkProductInfo = (linkProductInfo) => {
     this.linkedProductInfomation = linkProductInfo;
   };
 
+  _getAttributProjectInfo = (attributProductInfo) => {
+    this.attributeProductInfomation = attributProductInfo;
+  };
+
   _onPressSaveProduct = () => {
-    console.log("shippingInfomation", this.shippingInfomation);
+    console.log("shippingInfomation test", this.shippingInfomation);
     console.log("statusInfo", this.productStatusInformation);
     console.log("externalInfo", this.externalInfomation);
     console.log("inventoryInfo", this.inventoryInformation);
     console.log("productInfo", this.productInfomation);
     console.log("linkedInfo", this.linkedProductInfomation);
+    console.log("Attribute", this.attributeProductInfomation);
 
     let product = this.state.response;
 
@@ -133,9 +144,15 @@ export default class AddEditProduct extends React.Component {
     let productType = productInfomation
       ? productInfomation.selectedProductType.id
       : product.product_type;
+    let productBrand = productInfomation
+      ? productInfomation.selectedProductBrand.slug
+      : product.productInfo.product_brand[0].slug;
+    let productCondition = productInfomation
+      ? productInfomation.selectedProductCondition.slug
+      : product.productInfo.product_condition[0].slug;
     let categoryIds =
       productInfomation && productInfomation.selectedCategories.length > 0
-        ? productInfomation.selectedCategories.map(item => {
+        ? productInfomation.selectedCategories.map((item) => {
             return item.id;
           })
         : product.category_ids;
@@ -152,17 +169,17 @@ export default class AddEditProduct extends React.Component {
 
     let newImages =
       statusInfo && statusInfo.newImages
-        ? statusInfo.newImages.map(item => {
+        ? statusInfo.newImages.map((item) => {
             return item.imageId;
           })
         : [];
 
     let galleryImage =
       statusInfo && statusInfo.images
-        ? statusInfo.images.map(item => {
+        ? statusInfo.images.map((item) => {
             return item.id;
           })
-        : product.gallery_images.map(item => {
+        : product.gallery_images.map((item) => {
             return item.id;
           });
     galleryImage = galleryImage ? galleryImage : [];
@@ -180,7 +197,7 @@ export default class AddEditProduct extends React.Component {
     let stock_status = inventoryInfo
       ? inventoryInfo.selectedStatus.id
       : product.stock_status;
-    let stock_quantity = inventoryInfo
+    let stock_quantity = c
       ? inventoryInfo.stockQuantity
       : product.stock_quantity;
     let backorders = inventoryInfo
@@ -216,24 +233,24 @@ export default class AddEditProduct extends React.Component {
       ? this.linkedProductInfomation
       : null;
     let crosssell_ids = linkProductInfo
-      ? linkProductInfo.crossSelles.map(item => {
+      ? linkProductInfo.crossSelles.map((item) => {
           return item.id;
         })
       : product.crosssell_ids;
     let upsell_ids = linkProductInfo
-      ? linkProductInfo.upselles.map(item => {
+      ? linkProductInfo.upselles.map((item) => {
           return item.id;
         })
       : product.upsell_ids;
     let grouped_products = linkProductInfo
-      ? linkProductInfo.groupedProduct.map(item => {
+      ? linkProductInfo.groupedProduct.map((item) => {
           return item.id;
         })
       : product.grouped_products;
     this.setState(
       {
         // isGetProductInfoData: true,
-        isProgress: true
+        isProgress: true,
       },
       () => {
         let data = JSON.stringify({
@@ -244,6 +261,8 @@ export default class AddEditProduct extends React.Component {
           regular_price: regularPrice,
           sale_price: salePrice,
           product_type: productType,
+          product_condition: productCondition,
+          store: productBrand,
           category: categoryIds,
 
           product_image_gallery: product_image_gallery,
@@ -266,7 +285,7 @@ export default class AddEditProduct extends React.Component {
           crosssell_ids: crosssell_ids,
           product_url: product_url,
           button_text: button_text,
-          grouped_products: grouped_products
+          grouped_products: grouped_products,
         });
         let url =
           AppConstant.BASE_URL +
@@ -274,9 +293,9 @@ export default class AddEditProduct extends React.Component {
           this.productId +
           "/?seller_id=" +
           this.sellerId;
-        fetchDataFromAPI(url, "POST", data, null).then(response => {
+        fetchDataFromAPI(url, "POST", data, null).then((response) => {
           this.setState({
-            isProgress: false
+            isProgress: false,
           });
           if (response && response.success) {
             this.componentDidMount();
@@ -307,7 +326,7 @@ export default class AddEditProduct extends React.Component {
           <View
             style={{
               flex: 1,
-              alignSelf: "stretch"
+              alignSelf: "stretch",
             }}
           >
             {this.state.isMaintenance ? (
@@ -319,7 +338,7 @@ export default class AddEditProduct extends React.Component {
               <Tabs
                 renderTabBar={() => <ScrollableTab />}
                 tabBarUnderlineStyle={{
-                  backgroundColor: ThemeConstant.ACCENT_COLOR
+                  backgroundColor: ThemeConstant.ACCENT_COLOR,
                 }}
               >
                 <Tab
@@ -425,6 +444,26 @@ export default class AddEditProduct extends React.Component {
                 >
                   <Text> Tab2 </Text>
                 </Tab> */}
+
+                <Tab
+                  heading={strings("ATTRIBUTE")}
+                  tabStyle={styles.tabStyle}
+                  activeTabStyle={styles.activeTabStyle}
+                  textStyle={styles.textStyle}
+                  activeTextStyle={styles.activeTextStyle}
+                >
+                  <SellerAttribute
+                    statusOption={this.state.response.status_options}
+                    statusValue={this.state.response.status}
+                    prodcutAttribut={this.state.response.product_attributes}
+                    selectedAttribute={this.state.response.attributes}
+                    productId={this.state.response.id}
+                    _getattributproductInformation={this._getAttributProjectInfo.bind(
+                      this
+                    )}
+                    isGetProductInfoData={this.state.isGetProductInfoData}
+                  />
+                </Tab>
                 <Tab
                   heading={strings("PRODUCT_STATUS")}
                   tabStyle={styles.tabStyle}
@@ -442,6 +481,7 @@ export default class AddEditProduct extends React.Component {
                     isGetProductInfoData={this.state.isGetProductInfoData}
                   />
                 </Tab>
+
                 <Tab
                   heading={strings("PRODUCT_AUCTION")}
                   tabStyle={styles.tabStyle}
@@ -462,8 +502,16 @@ export default class AddEditProduct extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  tabStyle: { backgroundColor: ThemeConstant.BACKGROUND_COLOR,  alignItems:"center", justifyContent:"center" },
-  activeTabStyle: { backgroundColor: ThemeConstant.ACCENT_COLOR,alignItems:"center",justifyContent:"center"},
+  tabStyle: {
+    backgroundColor: ThemeConstant.BACKGROUND_COLOR,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activeTabStyle: {
+    backgroundColor: ThemeConstant.ACCENT_COLOR,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   textStyle: { color: ThemeConstant.ACCENT_COLOR },
-  activeTextStyle: { color: ThemeConstant.BACKGROUND_COLOR }
+  activeTextStyle: { color: ThemeConstant.BACKGROUND_COLOR },
 });

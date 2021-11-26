@@ -11,6 +11,8 @@
     "@react-native-community/async-storage": "^1.5.1",
     "@react-native-community/netinfo": "^4.2.0",
     "@react-native-community/viewpager": "^3.3.0",
+    "@react-native-picker/picker": "^2.2.1",
+    "axios": "^0.24.0",
     "md5": "^2.2.1",
     "native-base": "^2.10.0",
     "react": "16.9.0",

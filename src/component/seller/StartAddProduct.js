@@ -6,7 +6,6 @@ import CustomActionbar from "../../container/CustomActionbar";
 import StringConstant from "../../app_constant/StringConstant";
 import ThemeConstant from "../../app_constant/ThemeConstant";
 import {
-  Picker,
   Header,
   Button,
   Icon,
@@ -21,7 +20,7 @@ import Loading from "../../container/LoadingComponent";
 import MaintenanceLayout from "../../container/MaintenanceLayout";
 import { showSuccessToast, showErrorToast } from "../../utility/Helper";
 import { strings } from "../../localize_constant/I18";
-
+import {Picker} from '@react-native-picker/picker';
 export default class StartAddProduct extends React.Component {
   sellerId = 0;
   isComponentActive = true;
@@ -30,7 +29,12 @@ export default class StartAddProduct extends React.Component {
     isLoading: true,
     categories: [],
     productTypes: [],
+    productCondition:[],
+    productbrand:[],
+
     selectedProductType: {},
+    selectedProductBrand:{},
+    selectedProductCondition:{},
     isSelected: false
   };
   componentWillUnmount() {
@@ -62,7 +66,11 @@ export default class StartAddProduct extends React.Component {
           this.setState({
             categories: categories,
             productTypes: response.productTypes,
+            productbrand: response.product_brands,
+            productCondition: response.product_conditions,
+            selectedProductBrand:response.product_brands[0],
             selectedProductType: response.productTypes[0],
+            selectedProductCondition:response.product_conditions[0],
             isServerMaintenance: false
           });
         } else {
@@ -78,6 +86,20 @@ export default class StartAddProduct extends React.Component {
       selectedProductType: productType
     });
   };
+
+  _selectProductBrand = productBrand => {
+    this.setState({
+      selectedProductBrand: productBrand
+    });
+  };
+
+  _selectProductCondition = productCondition => {
+    this.setState({
+      selectedProductCondition: productCondition
+    });
+  };
+
+
   onPressCheckBox = category => {
     this.setState({
       isSelected: !this.state.isSelected
@@ -95,7 +117,9 @@ export default class StartAddProduct extends React.Component {
       this.props.navigation.navigate("NewProductInformationEdit", {
         sellerId: this.sellerId,
         categories: this.state.categories,
-        productType: this.state.selectedProductType
+        productType: this.state.selectedProductType,
+        productBrand: this.state.selectedProductBrand,
+        productCondition : this.state.selectedProductCondition
       });
     } else {
       showErrorToast(strings("ERROR_NOT_SELECTED_CATEGORY"));
@@ -161,6 +185,82 @@ export default class StartAddProduct extends React.Component {
                         key={i}
                         value={productType}
                         label={productType.title}
+                      />
+                    );
+                  })}
+                </Picker>
+                <Text style={styles.headingTextStyle}>
+                  {strings("SELECT_SELLER_PRODUCT_BRANDS")}
+                </Text>
+                <Picker
+                  mode="dropdown"
+                  placeholder="Country"
+                  iosIcon={<Icon name="arrow-down" />}
+                  // renderHeader={backAction => (
+                  //   <Header
+                  //     style={{ backgroundColor: ThemeConstant.PRIMARY_COLOR }}
+                  //   >
+                  //     <Left>
+                  //       <Button transparent onPress={backAction}>
+                  //         <Icon name="arrow-back" />
+                  //       </Button>
+                  //     </Left>
+                  //     <Body style={{ flex: 3 }}>
+                  //       <Title>
+                  //         {strings("")SELECT_SELLER_PRODUCT_TYPE}
+                  //       </Title>
+                  //     </Body>
+                  //     <Right />
+                  //   </Header>
+                  // )}
+                  selectedValue={this.state.selectedProductBrand}
+                  onValueChange={this._selectProductBrand.bind(this)}
+                  style={styles.pickerStyle}
+                >
+                  {this.state.productbrand.map((productBrand, i) => {
+                    return (
+                      <Picker.Item
+                        key={i}
+                        value={productBrand}
+                        label={productBrand.title}
+                      />
+                    );
+                  })}
+                </Picker>
+                <Text style={styles.headingTextStyle}>
+                  {strings("SELECT_SELLER_PRODUCT_CONDITION")}
+                </Text>
+                <Picker
+                  mode="dropdown"
+                  placeholder="Country"
+                  iosIcon={<Icon name="arrow-down" />}
+                  // renderHeader={backAction => (
+                  //   <Header
+                  //     style={{ backgroundColor: ThemeConstant.PRIMARY_COLOR }}
+                  //   >
+                  //     <Left>
+                  //       <Button transparent onPress={backAction}>
+                  //         <Icon name="arrow-back" />
+                  //       </Button>
+                  //     </Left>
+                  //     <Body style={{ flex: 3 }}>
+                  //       <Title>
+                  //         {strings("")SELECT_SELLER_PRODUCT_TYPE}
+                  //       </Title>
+                  //     </Body>
+                  //     <Right />
+                  //   </Header>
+                  // )}
+                  selectedValue={this.state.selectedProductCondition}
+                  onValueChange={this._selectProductCondition.bind(this)}
+                  style={styles.pickerStyle}
+                >
+                  {this.state.productCondition.map((productCondition, i) => {
+                    return (
+                      <Picker.Item
+                        key={i}
+                        value={productCondition}
+                        label={productCondition.title}
                       />
                     );
                   })}

@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   TouchableOpacity,
-  Platform
+  Platform,
 } from "react-native";
 import { Form, Textarea } from "native-base";
 import ThemeConstant from "../../app_constant/ThemeConstant";
@@ -15,12 +15,16 @@ import AppConstant from "../../app_constant/AppConstant";
 import ProgressDialog from "../../container/ProgressDialog";
 import {
   fetchDataFromAPI,
-  fetchDataFromAPIMultipart
+  fetchDataFromAPIMultipart,
 } from "../../utility/APIConnection";
 import { showSuccessToast, showErrorToast } from "../../utility/Helper";
 import StringConstant from "../../app_constant/StringConstant";
 import { CustomImage } from "../../container/CustomImage";
-import { isStringEmpty, SCREEN_WIDTH, onlyDigitText } from "../../utility/UtilityConstant";
+import {
+  isStringEmpty,
+  SCREEN_WIDTH,
+  onlyDigitText,
+} from "../../utility/UtilityConstant";
 import AskCameraGalleryDialog from "../../container/AskCameraGalleryDialog";
 import _ from "lodash";
 import CustomActionbar from "../../container/CustomActionbar";
@@ -50,7 +54,7 @@ export default class NewProductInformationEdit extends React.Component {
     imagewidth: 0,
     imageHeight: 0,
     isCropping: false,
-    isProgress: false
+    isProgress: false,
   };
 
   componentDidMount() {
@@ -58,27 +62,27 @@ export default class NewProductInformationEdit extends React.Component {
     console.log("SellerId=>>", this.sellerId);
   }
 
-  _openGalleryDialog = updateImageType => {
+  _openGalleryDialog = (updateImageType) => {
     this.setState({
       openImageGallery: true,
       imagewidth: ThemeConstant.UPLOAD_IMAGE_SIZE,
       imageHeight: ThemeConstant.UPLOAD_IMAGE_SIZE,
-      isCropping: true
+      isCropping: true,
     });
   };
   _handleGalleryDialog = (image, updateImageType) => {
     this.setState({
       uploadProductImage: image,
-      openImageGallery: false
+      openImageGallery: false,
     });
     this.callMultiPartAPI(image, AppConstant.SAVE_PROFILE_IMAGE);
   };
-  getFileName = uri => {
+  getFileName = (uri) => {
     return uri.substring(uri.lastIndexOf("/") + 1, uri.length);
   };
   _onBackGalleryDialog = () => {
     this.setState({
-      openImageGallery: false
+      openImageGallery: false,
     });
   };
 
@@ -88,22 +92,24 @@ export default class NewProductInformationEdit extends React.Component {
       formData.append("profile_Image", {
         uri: uploadImageData.path,
         type: uploadImageData.mime,
-        name: this.getFileName(uploadImageData.path)
+        name: this.getFileName(uploadImageData.path),
       });
       let url = AppConstant.BASE_URL + "media/upload";
-      fetchDataFromAPIMultipart(url, "POST", formData, null).then(response => {
-        this.setState({
-          isProgress: false,
-          isButtonClicked: false
-        });
-        if (response && response.success) {
+      fetchDataFromAPIMultipart(url, "POST", formData, null).then(
+        (response) => {
           this.setState({
-            productImageId: response.image_id
+            isProgress: false,
+            isButtonClicked: false,
           });
-        } else {
-          showErrorToast(response.message);
+          if (response && response.success) {
+            this.setState({
+              productImageId: response.image_id,
+            });
+          } else {
+            showErrorToast(response.message);
+          }
         }
-      });
+      );
     }
   };
 
@@ -114,15 +120,15 @@ export default class NewProductInformationEdit extends React.Component {
       let body = JSON.stringify({
         sku: this.state.productSKU,
         seller_id: this.sellerId,
-        sellerId: this.sellerId
+        sellerId: this.sellerId,
       });
       console.log("SellerId=>>", this.sellerId);
-      fetchDataFromAPI(url, "POST", body, null).then(response => {
+      fetchDataFromAPI(url, "POST", body, null).then((response) => {
         if (response && response.success) {
           this.setState({
             isSKUAvailable: true,
             isProgress: false,
-            skuError: ""
+            skuError: "",
           });
           showSuccessToast(response.message);
         } else {
@@ -130,7 +136,7 @@ export default class NewProductInformationEdit extends React.Component {
           this.setState({
             isProgress: false,
             isSKUAvailable: false,
-            skuError: response.message
+            skuError: response.message,
           });
         }
       });
@@ -140,12 +146,24 @@ export default class NewProductInformationEdit extends React.Component {
   _onSaveButtonPress = () => {
     let isFieldComplete = true;
     this.setState({
-      showError: true
+      showError: true,
     });
     let productType = this.props.navigation.getParam("productType", {
       id: "simple",
-      title: "Simple product"
+      title: "Simple product",
     }).id;
+
+    let productBrand = this.props.navigation.getParam("productBrand", {
+      id: "49",
+      title: "Apple",
+      slug: "apple",
+    }).slug;
+
+    let productCondition = this.props.navigation.getParam("productCondition", {
+      id: "167",
+      title: "For Parts",
+      slug: "for-parts",
+    }).slug;
 
     if (isStringEmpty(this.state.productName)) {
       if (isFieldComplete) {
@@ -168,11 +186,11 @@ export default class NewProductInformationEdit extends React.Component {
         }
         isFieldComplete = false;
         this.setState({
-          salePriceError: strings("ERROR_SALE_PRICE")
+          salePriceError: strings("ERROR_SALE_PRICE"),
         });
       } else {
         this.setState({
-          salePriceError: ""
+          salePriceError: "",
         });
       }
     }
@@ -184,23 +202,23 @@ export default class NewProductInformationEdit extends React.Component {
       this.setState({
         skuError: isStringEmpty(this.state.skuError)
           ? strings("SKU_VALIDATION_ERROR")
-          : this.state.skuError
+          : this.state.skuError,
       });
     } else {
       this.setState({
-        skuError: ""
+        skuError: "",
       });
     }
     if (isFieldComplete) {
       this.setState({
-        isProgress: true
+        isProgress: true,
       });
       let category = this.props.navigation.getParam("categories", []);
       category = category
-        .filter(item => {
+        .filter((item) => {
           return item["isSelected"];
         })
-        .map(item => {
+        .map((item) => {
           return item.id;
         });
       console.log("Category", category);
@@ -208,6 +226,8 @@ export default class NewProductInformationEdit extends React.Component {
       let url = AppConstant.BASE_URL + "seller/product/add/";
       let body = JSON.stringify({
         product_type: productType,
+        product_condition: productCondition,
+        store: productBrand,
         category: category,
         product_name: this.state.productName,
         description: this.state.aboutProduct,
@@ -216,11 +236,11 @@ export default class NewProductInformationEdit extends React.Component {
         sku: this.state.productSKU,
         regular_price: this.state.regularPrice,
         sale_price: this.state.salePrice,
-        seller_id: this.sellerId
+        seller_id: this.sellerId,
       });
-      fetchDataFromAPI(url, "POST", body, null).then(response => {
+      fetchDataFromAPI(url, "POST", body, null).then((response) => {
         this.setState({
-          isProgress: false
+          isProgress: false,
         });
         if (response && response.success) {
           this.props.navigation.navigate("SellerProduct", { isUpdate: true });
@@ -238,7 +258,7 @@ export default class NewProductInformationEdit extends React.Component {
   render() {
     const productType = this.props.navigation.getParam("productType", {
       id: "simple",
-      title: "Simple product"
+      title: "Simple product",
     }).id;
 
     return (
@@ -251,7 +271,7 @@ export default class NewProductInformationEdit extends React.Component {
           _onBackPress={this._onBackPress.bind(this)}
         />
         <ScrollView
-          ref={view => (this.scrollView = view)}
+          ref={(view) => (this.scrollView = view)}
           keyboardShouldPersistTaps={"always"}
         >
           <KeyboardAvoidingView
@@ -265,7 +285,7 @@ export default class NewProductInformationEdit extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               value={this.state.productName}
-              onChangeText={text => {
+              onChangeText={(text) => {
                 this.setState({ productName: text });
               }}
               keyboardType="default"
@@ -289,7 +309,7 @@ export default class NewProductInformationEdit extends React.Component {
                 returnKeyType="next"
                 keyboardType="default"
                 placeholder={strings("ABOUT_PRODUCT")}
-                onChangeText={text => {
+                onChangeText={(text) => {
                   this.setState({ aboutProduct: text });
                 }}
                 multiline={true}
@@ -341,12 +361,12 @@ export default class NewProductInformationEdit extends React.Component {
             <TextInput
               style={ViewStyle.inputTextStyle}
               autoCapitalize="none"
-              // autoCorrect={false}
-              // value={this.state.salePrice}
+              value={this.state.productVideo}
               // onChangeText={(text) => {
-              //   this.setState({ salePrice: onlyDigitText(text) });
+              //   this.setState({
+              //     productVideo: onlyDigitText(text),
+              //   });
               // }}
-              // keyboardType="number-pad"
               returnKeyType="next"
               placeholder={strings("PRODUCT_VIDEO")}
             />
@@ -360,8 +380,11 @@ export default class NewProductInformationEdit extends React.Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 value={this.state.productSKU}
-                onChangeText={text => {
-                  this.setState({ productSKU: text, isSKUAvailable: false });
+                onChangeText={(text) => {
+                  this.setState({
+                    productSKU: text,
+                    isSKUAvailable: false,
+                  });
                 }}
                 keyboardType="default"
                 returnKeyType="next"
@@ -397,7 +420,7 @@ export default class NewProductInformationEdit extends React.Component {
                   autoCapitalize="none"
                   autoCorrect={false}
                   value={this.state.regularPrice}
-                  onChangeText={text => {
+                  onChangeText={(text) => {
                     this.setState({ regularPrice: onlyDigitText(text) });
                   }}
                   keyboardType="number-pad"
@@ -419,7 +442,7 @@ export default class NewProductInformationEdit extends React.Component {
                   autoCapitalize="none"
                   autoCorrect={false}
                   value={this.state.salePrice}
-                  onChangeText={text => {
+                  onChangeText={(text) => {
                     this.setState({ salePrice: onlyDigitText(text) });
                   }}
                   keyboardType="number-pad"
@@ -443,7 +466,7 @@ export default class NewProductInformationEdit extends React.Component {
                 returnKeyType="next"
                 keyboardType="default"
                 placeholder={strings("PRODUCT_DESCRIPTION_SELLER")}
-                onChangeText={text => {
+                onChangeText={(text) => {
                   this.setState({ shortDescription: text });
                 }}
                 multiline={true}
@@ -487,18 +510,18 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 5,
     marginRight: 5,
-    borderRadius: 5
+    borderRadius: 5,
   },
   headingTextStyle: {
     fontWeight: "bold",
     fontSize: ThemeConstant.DEFAULT_LARGE_TEXT_SIZE,
-    marginTop: ThemeConstant.MARGIN_GENERIC
+    marginTop: ThemeConstant.MARGIN_GENERIC,
   },
   buttonText: {
     color: "#fff",
     fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE,
     textAlign: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   inputTextStyle: {
     backgroundColor: ThemeConstant.BACKGROUND_COLOR,
@@ -507,11 +530,11 @@ const styles = StyleSheet.create({
     color: ThemeConstant.DEFAULT_TEXT_COLOR,
     margin: ThemeConstant.MARGIN_TINNY,
     fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE,
-    padding: ThemeConstant.MARGIN_GENERIC
+    padding: ThemeConstant.MARGIN_GENERIC,
   },
   textError: {
     color: "red",
-    fontSize: ThemeConstant.DEFAULT_SMALL_TEXT_SIZE
+    fontSize: ThemeConstant.DEFAULT_SMALL_TEXT_SIZE,
   },
   signUpButtonStyle: {
     alignSelf: "center",
@@ -527,7 +550,7 @@ const styles = StyleSheet.create({
     color: ThemeConstant.ACCENT_COLOR,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE
+    fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE,
   },
   uploadImageContainer: {
     flexDirection: "row",
@@ -537,17 +560,17 @@ const styles = StyleSheet.create({
     borderRadius: ThemeConstant.MARGIN_TINNY,
     margin: ThemeConstant.MARGIN_TINNY,
     marginBottom: ThemeConstant.MARGIN_GENERIC,
-    marginTop: ThemeConstant.MARGIN_GENERIC
+    marginTop: ThemeConstant.MARGIN_GENERIC,
   },
   imagestyle: {
     alignSelf: "flex-start",
     width: SCREEN_WIDTH / 3,
-    height: SCREEN_WIDTH / 3
+    height: SCREEN_WIDTH / 3,
   },
   imageDescriptionstyle: {
     flex: 1,
     marginLeft: ThemeConstant.MARGIN_GENERIC,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   uploadButtonContainer: {
     width: 100,
@@ -557,7 +580,7 @@ const styles = StyleSheet.create({
     marginTop: ThemeConstant.MARGIN_NORMAL,
     marginLeft: ThemeConstant.MARGIN_TINNY,
     marginRight: ThemeConstant.MARGIN_TINNY,
-    borderRadius: ThemeConstant.MARGIN_TINNY
+    borderRadius: ThemeConstant.MARGIN_TINNY,
   },
   passInputViewStyle: {
     flexDirection: "row",
@@ -566,13 +589,13 @@ const styles = StyleSheet.create({
     borderColor: ThemeConstant.LINE_COLOR,
     borderWidth: 1,
     margin: ThemeConstant.MARGIN_TINNY,
-    paddingRight: ThemeConstant.MARGIN_TINNY
+    paddingRight: ThemeConstant.MARGIN_TINNY,
   },
   passInputTextStyle: {
     flex: 1,
     alignSelf: "stretch",
     fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE,
-    marginRight: ThemeConstant.MARGIN_TINNY
+    marginRight: ThemeConstant.MARGIN_TINNY,
   },
   validateButton: {
     color: ThemeConstant.ACCENT_COLOR,
@@ -583,8 +606,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     ...Platform.select({
       ios: { borderRadius: 10 },
-      android: { borderRadius: 10 }
-    })
+      android: { borderRadius: 10 },
+    }),
   },
   validatedButton: {
     color: ThemeConstant.LINE_COLOR,
@@ -595,7 +618,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     ...Platform.select({
       ios: { borderRadius: 10 },
-      android: { borderRadius: 10 }
-    })
-  }
+      android: { borderRadius: 10 },
+    }),
+  },
 });

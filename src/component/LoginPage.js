@@ -76,7 +76,7 @@ export default class LoginPage extends React.Component {
       .catch(error => {
         console.log("BiometryType++++", error.message);
       });
-  };
+};
 
   _handleEmail = email => {
     this.setState({ email: email });

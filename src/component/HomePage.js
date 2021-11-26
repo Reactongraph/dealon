@@ -16,17 +16,17 @@ import AsyncStorage from '@react-native-community/async-storage';
 import ThemeConstant from '../app_constant/ThemeConstant';
 import CustomActionbar from '../container/CustomActionbar';
 import AppConstant from '../app_constant/AppConstant';
-import {fetchDataFromAPI} from '../utility/APIConnection';
-import {setCartCount, setCategoryData} from '../app_constant/AppSharedPref';
-import {showErrorToast, showWarnToast} from '../utility/Helper';
+import { fetchDataFromAPI } from '../utility/APIConnection';
+import { setCartCount, setCategoryData } from '../app_constant/AppSharedPref';
+import { showErrorToast, showWarnToast } from '../utility/Helper';
 import DemoData from '../utility/DemoData';
-import {localeObject, strings} from '../localize_constant/I18';
+import { localeObject, strings } from '../localize_constant/I18';
 import HomePageProducts from '../container/HomePageProducts';
 import FeaturedCatagory from '../container/FeaturedCatagory';
 import IndicatorViewPager from '../container/viewpager/IndicatorViewPager';
 import PagerDotIndicator from '../container/viewpager/indicator/PagerDotIndicator';
 import ProductContext from '../context/ProductContext';
-export const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get(
+export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get(
   'window',
 );
 
@@ -195,6 +195,10 @@ export default class HomePage extends React.Component {
     this.screenProps.navigate('CartPage');
   };
 
+  _onPressFilter = () => {
+    this.screenProps.navigate('FiltersProduct');
+  };
+
   onPressNotification = () => {
     this.screenProps.navigate('NotificationPage');
   };
@@ -253,8 +257,11 @@ export default class HomePage extends React.Component {
         style={{
           flex: 1,
           backgroundColor: ThemeConstant.BACKGROUND_COLOR_1,
-          position: 'relative',
+          position: 'relative'
         }}>
+
+
+
         <CustomActionbar
           title={AppConstant.APP_NAME}
           iconName={'cart'}
@@ -274,6 +281,8 @@ export default class HomePage extends React.Component {
               refreshing={this.state.isReferesh}
             />
           }>
+
+
           <FeaturedCatagory
             featuredCategory={this.state.featuredCategory}
             onPressFeatureCategory={this.onPressFeatureCategory}
@@ -294,9 +303,9 @@ export default class HomePage extends React.Component {
                       <Image
                         style={[
                           styles.bannerStyle,
-                          {backgroundColor: banner.dominantColor},
+                          { backgroundColor: banner.dominantColor },
                         ]}
-                        source={{uri: banner.image}}
+                        source={{ uri: banner.image }}
                         // resizeMode={"contain"}
                         resizeMode={'cover'}
                       />
@@ -308,19 +317,44 @@ export default class HomePage extends React.Component {
           ) : null}
 
           <ProductContext.Provider
-            value={{onPressProduct: this.onPressProduct}}>
+            value={{ onPressProduct: this.onPressProduct }}>
             <HomePageProducts
               homeProduct={this.state.homeProduct}
               onPressViewAllProduct={this.onPressViewAllProduct}
               onPressProduct={this.onPressProduct}
             />
           </ProductContext.Provider>
+
+
+
+
         </ScrollView>
+
+        <View style={{ position: 'absolute', right: 20, bottom: 20, }}>
+          <TouchableOpacity
+            onPress={() => this._onPressFilter()}
+            style={{
+              borderWidth: 1,
+              borderColor: 'rgba(0,0,0,0.2)',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 50,
+              height: 50,
+              backgroundColor: '#fff',
+              borderRadius: 100,
+
+            }}>
+            <Image style={{ width: 20, height: 20, }} source={require('../../resources/images/ic_filter.png')} />
+          </TouchableOpacity>
+        </View>
+
+
+
         {this.state.loadingEnable ? (
           <Text
             style={[
               styles.viewAll,
-              {position: 'absolute', alignSelf: 'center', top: 50},
+              { position: 'absolute', alignSelf: 'center', top: 50 },
             ]}>
             {strings('LOADING')}
           </Text>
