@@ -466,6 +466,7 @@ export default class SellerAttributes extends React.Component {
                             /> */}
 
                             <View style={{ flex: 1 }}>
+                                {this.state.items.length > 0 ?
                                 <MultiSelect
                                     hideTags
                                     items={this.state.items[item.index]}
@@ -525,6 +526,8 @@ export default class SellerAttributes extends React.Component {
                                     submitButtonColor="#CCC"
                                     submitButtonText="Submit"
                                 />
+                                : null
+                            }
                                 <View>
                                     {/* <Text>{key+"  "+this.state.textInputs[item.index]}</Text>
                                     {this.multiSelect && this.multiSelect.getSelectedItemsExt(this.state.textInputs[item.index])} */}
@@ -584,6 +587,7 @@ export default class SellerAttributes extends React.Component {
                             </Picker>
 
                             <View style={{ flex: 1 }}>
+                            { this.state.items.length > 0 ?
                                 <MultiSelect
                                     hideTags
                                     items={this.state.items[item.index]}
@@ -652,6 +656,8 @@ export default class SellerAttributes extends React.Component {
                                     searchInputStyle={{ color: '#CCC' }}
                                     submitButtonColor="#CCC"
                                     submitButtonText="Submit" />
+                                : null
+                            }
 
                                 <View>
                                     {/* <Text>{item.index+"  "+this.state.textInputs[item.index]}</Text>

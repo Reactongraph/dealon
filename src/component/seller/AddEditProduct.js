@@ -197,7 +197,7 @@ export default class AddEditProduct extends React.Component {
     let stock_status = inventoryInfo
       ? inventoryInfo.selectedStatus.id
       : product.stock_status;
-    let stock_quantity = c
+    let stock_quantity = inventoryInfo
       ? inventoryInfo.stockQuantity
       : product.stock_quantity;
     let backorders = inventoryInfo
