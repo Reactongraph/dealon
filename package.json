@@ -40,6 +40,7 @@
     "react-native-vector-icons": "^6.1.0",
     "react-native-version-check": "^3.0.3",
     "react-native-webview": "^7.0.3",
+    "react-native-youtube": "^2.0.2",
     "react-navigation": "^2.17.0",
     "react-timer-mixin": "^0.13.4",
     "realm": "^3.5.0",

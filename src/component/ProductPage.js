@@ -33,6 +33,7 @@ import { isStringEmpty, stringToNumber, _getconnection } from '../utility/Utilit
 import AutoHeightWebView from './AutoHeightWebview';
 import RatingView from './RatingView';
 import NativeMethod from './ShareProductBridge'
+import VideoPlayer from "../container/VideoPlayer.js";
 
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get(
   'window',
@@ -69,7 +70,7 @@ export default class ProductPage extends React.Component {
     return (
       <PagerDotIndicator
         pageCount={
-          this.state.banners.length > 1 ? this.state.banners.length : 0
+          this.state.banners.length > 1 ? this.state.banners.length + 1 : 0
         }
         dotStyle={{
           width: 6,
@@ -689,6 +690,7 @@ export default class ProductPage extends React.Component {
                               </View>
                             );
                           })}
+                          <VideoPlayer />
                         </IndicatorViewPager>
                         <View style={[styles.productViewStyle, { marginTop: 0 }]}>
                           <Text

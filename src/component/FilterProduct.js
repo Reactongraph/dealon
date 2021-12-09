@@ -55,7 +55,16 @@ export default class FilterProduct extends React.Component {
         auction: "",
         quote: "",
         isSelected: false,
-        Alert_Visibility: false
+        Alert_Visibility: false,
+        showCategories: false,
+        showBrand: false,
+        showProductCondition: false,
+        showColor: false,
+        showSize: false,
+        showDisplay: false,
+        showMaterial: false,
+        showMemory: false,
+        showOperationSystem: false,
     };
 
     componentDidMount() {
@@ -600,14 +609,14 @@ export default class FilterProduct extends React.Component {
 
                                     <View style={{
                                         flex: 1,
-                                        alignItems: "center",
-                                        justifyContent: "center",
+                                        // alignItems: "center",
+                                        // justifyContent: "center",
                                         backgroundColor: ThemeConstant.BACKGROUND_COLOR_1,
                                     }}>
 
                                         <View style={{ width: '100%', padding: 20, borderRadius: 10, }}>
 
-                                            <TouchableOpacity style={{ alignSelf: 'flex-end', alignItems: "flex-end", justifyContent: "center", alignSelf: "stretch" }} onPress={() => this.setState({ Alert_Visibility: false })}>
+                                            <TouchableOpacity style={{ alignSelf: 'flex-end', alignItems: "flex-end", justifyContent: "center", alignSelf: "stretch", marginBottom: 30 }} onPress={() => this.setState({ Alert_Visibility: false })}>
                                                 <CustomIcon2
                                                     name="close"
                                                     size={28}
@@ -616,36 +625,63 @@ export default class FilterProduct extends React.Component {
                                             </TouchableOpacity>
 
                                             <ScrollView>
+                                                <TouchableOpacity onPress={() => this.setState({ showCategories: !this.state.showCategories })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Categories
-                                            </Text>
-                                                <FlatList
-                                                    data={this.state.product_cat}
-                                                    extraData={this.state.isSelected}
-                                                    renderItem={({ item }) => {
-                                                        return (
-                                                            <TouchableOpacity
-                                                                style={styles.checkBoxViewStyle}
-                                                                onPress={this.onPressCheckBoxCat.bind(this, item)}
-                                                            >
-                                                                <Text style={styles.checkboxTitleStyle}>
-                                                                    {item.name}
-                                                                </Text>
-                                                                <CheckBox
-                                                                    checked={item.isSelected}
-                                                                    onPress={this.onPressCheckBoxCat.bind(this, item)}
-                                                                    color={ThemeConstant.ACCENT_COLOR}
-                                                                />
-                                                            </TouchableOpacity>
-                                                        );
-                                                    }}
+                                                    </Text>
+                                                    { this.state.showCategories ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                                                        </View>
+                                                </TouchableOpacity>
+                                                { this.state.showCategories ? <FlatList
+                                                  data={this.state.product_cat}
+                                                  extraData={this.state.isSelected}
+                                                  renderItem={({ item }) => {
+                                                      return (
+                                                          <TouchableOpacity
+                                                              style={styles.checkBoxViewStyle}
+                                                              onPress={this.onPressCheckBoxCat.bind(this, item)}
+                                                          >
+                                                              <Text style={styles.checkboxTitleStyle}>
+                                                                  {item.name}
+                                                              </Text>
+                                                              <CheckBox
+                                                                  checked={item.isSelected}
+                                                                  onPress={this.onPressCheckBoxCat.bind(this, item)}
+                                                                  color={ThemeConstant.ACCENT_COLOR}
+                                                              />
+                                                          </TouchableOpacity>
+                                                      );
+                                                  }}
 
-                                                />
-
+                                                /> : null}
+                                              <TouchableOpacity onPress={() => this.setState({ showBrand: !this.state.showBrand })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Brand
-                                            </Text>
-                                                <FlatList
+                                                    </Text>
+                                                    { this.state.showBrand ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                    </View>
+                                                </TouchableOpacity>
+                                                { this.state.showBrand ? <FlatList
                                                     data={this.state.store}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -666,40 +702,66 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
+                                                /> : null}
 
-
+                                                <TouchableOpacity onPress={() => this.setState({ showProductCondition: !this.state.showProductCondition })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Product Condition
-                                            </Text>
-                                                <FlatList
-                                                    data={this.state.product_condition}
-                                                    extraData={this.state.isSelected}
-                                                    renderItem={({ item }) => {
-                                                        return (
-                                                            <TouchableOpacity
-                                                                style={styles.checkBoxViewStyle}
-                                                                onPress={this.onPressCheckBoxProductCondition.bind(this, item)}
-                                                            >
-                                                                <Text style={styles.checkboxTitleStyle}>
-                                                                    {item.name}
-                                                                </Text>
-                                                                <CheckBox
-                                                                    checked={item.isSelected}
-                                                                    onPress={this.onPressCheckBoxProductCondition.bind(this, item)}
-                                                                    color={ThemeConstant.ACCENT_COLOR}
-                                                                />
-                                                            </TouchableOpacity>
-                                                        );
-                                                    }}
+                                                    </Text>
+                                                    { this.state.showProductCondition ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                    </View>
+                                                    </TouchableOpacity>
+                                                {this.state.showProductCondition ?<FlatList
+                                                      data={this.state.product_condition}
+                                                      extraData={this.state.isSelected}
+                                                      renderItem={({ item }) => {
+                                                          return (
+                                                              <TouchableOpacity
+                                                                  style={styles.checkBoxViewStyle}
+                                                                  onPress={this.onPressCheckBoxProductCondition.bind(this, item)}
+                                                              >
+                                                                  <Text style={styles.checkboxTitleStyle}>
+                                                                      {item.name}
+                                                                  </Text>
+                                                                  <CheckBox
+                                                                      checked={item.isSelected}
+                                                                      onPress={this.onPressCheckBoxProductCondition.bind(this, item)}
+                                                                      color={ThemeConstant.ACCENT_COLOR}
+                                                                  />
+                                                              </TouchableOpacity>
+                                                          );
+                                                      }}
 
-                                                />
+                                                  /> : null}
 
-
+                                                  <TouchableOpacity onPress={() => this.setState({ showColor: !this.state.showColor })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Color
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showColor ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                { this.state.showColor ? <FlatList
                                                     data={this.state.color}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -720,13 +782,26 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
+                                                /> : null}
 
-
+                                                <TouchableOpacity onPress={() => this.setState({ showSize: !this.state.showSize })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Size
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showSize ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                { this.state.showSize ? <FlatList
                                                     data={this.state.size}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -747,13 +822,26 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
+                                                /> : null}
 
-
+                                                <TouchableOpacity onPress={() => this.setState({ showDisplay: !this.state.showDisplay })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Display
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showDisplay ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                {this.state.showDisplay ? <FlatList
                                                     data={this.state.display}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -774,13 +862,25 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
-
-
+                                                /> : null}
+                                                <TouchableOpacity onPress={() => this.setState({ showMaterial: !this.state.showMaterial })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Material
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showMaterial ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                {this.state.showMaterial ? <FlatList
                                                     data={this.state.material}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -801,12 +901,25 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
-
+                                                /> : null}
+                                                <TouchableOpacity onPress={() => this.setState({ showMemory: !this.state.showMemory })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Memory
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showMemory ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                {this.state.showMemory ? <FlatList
                                                     data={this.state.memory}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -827,13 +940,25 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
-
-
+                                                /> : null}
+                                                <TouchableOpacity onPress={() => this.setState({ showOperationSystem: !this.state.showOperationSystem })}>
+                                                <View style={styles.filterheading}>
                                                 <Text style={styles.headingTextStyle}>
                                                     Operation system
                                                 </Text>
-                                                <FlatList
+                                                { this.state.showOperationSystem ?
+                                                        <CustomIcon2
+                                                                                          name={"arrow-down"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />
+                                                        :
+                                                        <CustomIcon2
+                                                                                          name={"arrow-right"}
+                                                                                          size={ThemeConstant.DEFAULT_ICON_SIZE}
+                                                                                        />}
+                                                </View>
+                                                </TouchableOpacity>
+                                                {this.state.showOperationSystem ? <FlatList
                                                     data={this.state.operation_system}
                                                     extraData={this.state.isSelected}
                                                     renderItem={({ item }) => {
@@ -854,8 +979,7 @@ export default class FilterProduct extends React.Component {
                                                         );
                                                     }}
 
-                                                />
-
+                                                /> : null}
                                                 <View style={{ flexDirection: 'row' }}>
 
                                                     <TouchableOpacity
@@ -1028,4 +1152,9 @@ const styles = StyleSheet.create({
         borderRadius: ThemeConstant.MARGIN_TINNY,
         flex: 1,
     },
+    filterheading: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
 });
