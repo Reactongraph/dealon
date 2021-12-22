@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet, TextInput, } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TextInput } from "react-native";
 import { Picker, Icon } from "native-base";
 import ThemeConstant from "../../app_constant/ThemeConstant";
 import ViewStyle from "../../app_constant/ViewStyle";
@@ -13,7 +13,10 @@ export default class ApplyShipping extends React.Component {
     width: "",
     length: "",
     shippingClasses: [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
-    selectedShippingClass: {}
+    selectedShippingClass: {},
+    dispatchedIn: "",
+    selectedShippingMethod: "",
+    shippingMethod: [{ id: "0", title: strings("SELECT_SHIPPING_METHOD") }],
   };
 
   updateinfoData = () => {
@@ -23,46 +26,58 @@ export default class ApplyShipping extends React.Component {
   componentDidMount() {
     this.setState(
       {
-        shippingClasses: this.props.shippingInfo && this.props.shippingInfo.length > 0 ? this.props.shippingInfo : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
+        shippingClasses:
+          this.props.shippingInfo && this.props.shippingInfo.length > 0
+            ? this.props.shippingInfo
+            : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
         weight: this.props.weight ? this.props.weight : "",
         width: this.props.width ? this.props.width : "",
-        length: this.props.length  ? this.props.length :"",
-        height: this.props.height ? this.props.height :""
+        length: this.props.length ? this.props.length : "",
+        height: this.props.height ? this.props.height : "",
       },
       () => this.updateinfoData()
     );
-    this.updateShippingClass(this.props.shippingInfo, this.props.shipping_class_id)
+    this.updateShippingClass(
+      this.props.shippingInfo,
+      this.props.shipping_class_id
+    );
   }
 
   componentWillUpdate(newProps) {
     if (newProps != this.props) {
       this.setState(
         {
-          shippingClasses: newProps.shippingInfo && newProps.shippingInfo.length > 0 ? newProps.shippingInfo : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
+          shippingClasses:
+            newProps.shippingInfo && newProps.shippingInfo.length > 0
+              ? newProps.shippingInfo
+              : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
           weight: newProps.weight ? newProps.weight : "",
           width: newProps.width ? newProps.width : "",
           length: newProps.length ? newProps.length : "",
-          height: newProps.height ? newProps.height : ""
+          height: newProps.height ? newProps.height : "",
         },
         () => this.updateinfoData()
       );
-      this.updateShippingClass(newProps.shippingInfo, newProps.shipping_class_id)
+      this.updateShippingClass(
+        newProps.shippingInfo,
+        newProps.shipping_class_id
+      );
     }
   }
 
-  updateShippingClass = (options, value)=>{
-      options = options ? options : [];
-      options.forEach(element => {
-          if(element.id == value){
-              this._selectShippingClass(element);
-          }          
-      });
-  }
+  updateShippingClass = (options, value) => {
+    options = options ? options : [];
+    options.forEach((element) => {
+      if (element.id == value) {
+        this._selectShippingClass(element);
+      }
+    });
+  };
 
-  _selectShippingClass = selectedClass => {
+  _selectShippingClass = (selectedClass) => {
     this.setState(
       {
-        selectedShippingClass: selectedClass
+        selectedShippingClass: selectedClass,
       },
       () => this.updateinfoData()
     );
@@ -77,8 +92,10 @@ export default class ApplyShipping extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           value={this.state.weight}
-          onChangeText={text => {
-            this.setState({ weight: onlyDigitText(text) }, () => this.updateinfoData());
+          onChangeText={(text) => {
+            this.setState({ weight: onlyDigitText(text) }, () =>
+              this.updateinfoData()
+            );
           }}
           maxLength={5}
           keyboardType="number-pad"
@@ -92,8 +109,10 @@ export default class ApplyShipping extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           value={this.state.length}
-          onChangeText={text => {
-            this.setState({ length: onlyDigitText(text) }, () => this.updateinfoData());
+          onChangeText={(text) => {
+            this.setState({ length: onlyDigitText(text) }, () =>
+              this.updateinfoData()
+            );
           }}
           maxLength={5}
           keyboardType="number-pad"
@@ -106,8 +125,10 @@ export default class ApplyShipping extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           value={this.state.width}
-          onChangeText={text => {
-            this.setState({ width: onlyDigitText(text) }, () => this.updateinfoData());
+          onChangeText={(text) => {
+            this.setState({ width: onlyDigitText(text) }, () =>
+              this.updateinfoData()
+            );
           }}
           maxLength={5}
           keyboardType="number-pad"
@@ -120,17 +141,17 @@ export default class ApplyShipping extends React.Component {
           autoCapitalize="none"
           autoCorrect={false}
           value={this.state.height}
-          onChangeText={text => {
-            this.setState({ height: onlyDigitText(text) }, () => this.updateinfoData());
+          onChangeText={(text) => {
+            this.setState({ height: onlyDigitText(text) }, () =>
+              this.updateinfoData()
+            );
           }}
           maxLength={5}
           keyboardType="number-pad"
           returnKeyType="next"
           placeholder={"0"}
         />
-        <Text style={styles.headingTextStyle}>
-          {strings("SHIPPING_CLASS")}
-        </Text>
+        <Text style={styles.headingTextStyle}>{strings("SHIPPING_CLASS")}</Text>
         <Picker
           mode="dropdown"
           iosIcon={<Icon name="arrow-down" />}
@@ -149,6 +170,56 @@ export default class ApplyShipping extends React.Component {
             );
           })}
         </Picker>
+
+        <Text style={styles.headingTextStyle}>{strings("DISPATCHED_IN")}</Text>
+        <Picker
+          mode="dropdown"
+          iosIcon={<Icon name="arrow-down" />}
+          selectedValue={this.state.dispatchedIn}
+          onValueChange={(value) =>
+            this.setState({
+              dispatchedIn: value,
+            })
+          }
+          style={styles.pickerStyle}
+        >
+          <Picker.Item
+            label="Select Dispatch Days"
+            value="Select Dispatch Days"
+          />
+          <Picker.Item label="1 Days" value="1 Days" />
+          <Picker.Item label="2 Days" value="2 Days" />
+          <Picker.Item label="3 Days" value="3 Days" />
+          <Picker.Item label="4 Days" value="4 Days" />
+          <Picker.Item label="5 Days" value="5 Days" />
+          <Picker.Item label="6 Days" value="6 Days" />
+          <Picker.Item label="7 Days" value="7 Days" />
+          <Picker.Item label="8 Days" value="8 Days" />
+          <Picker.Item label="9 Days" value="9 Days" />
+          <Picker.Item label="10 Days" value="10 Days" />
+        </Picker>
+
+        <Text style={styles.headingTextStyle}>
+          {strings("SHIPPING_METHOD")}
+        </Text>
+        <Picker
+          mode="dropdown"
+          iosIcon={<Icon name="arrow-down" />}
+          placeholder={strings("SHIPPING_METHOD")}
+          selectedValue={this.state.selectedShippingMethod}
+          // onValueChange={this._selectShippingClass.bind(this)}
+          style={styles.pickerStyle}
+        >
+          {this.state.shippingMethod.map((shippingMethod, i) => {
+            return (
+              <Picker.Item
+                key={i}
+                value={shippingMethod}
+                label={shippingMethod.title}
+              />
+            );
+          })}
+        </Picker>
       </ScrollView>
     );
   }
@@ -157,17 +228,17 @@ const styles = StyleSheet.create({
   container: {
     padding: ThemeConstant.MARGIN_GENERIC,
     borderWidth: 0.5,
-    borderColor: ThemeConstant.LINE_COLOR
+    borderColor: ThemeConstant.LINE_COLOR,
   },
   headingTextStyle: {
     fontWeight: "bold",
     fontSize: ThemeConstant.DEFAULT_LARGE_TEXT_SIZE,
-    marginTop: ThemeConstant.MARGIN_GENERIC
+    marginTop: ThemeConstant.MARGIN_GENERIC,
   },
   subHeadingTextStyle: {
     fontWeight: "bold",
     fontSize: ThemeConstant.DEFAULT_MEDIUM_TEXT_SIZE,
-    marginTop: ThemeConstant.MARGIN_GENERIC
+    marginTop: ThemeConstant.MARGIN_GENERIC,
   },
   inputTextStyle: {
     backgroundColor: ThemeConstant.BACKGROUND_COLOR,
@@ -175,11 +246,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: ThemeConstant.MARGIN_TINNY,
     padding: ThemeConstant.MARGIN_GENERIC,
-    marginLeft: ThemeConstant.MARGIN_GENERIC
+    marginLeft: ThemeConstant.MARGIN_GENERIC,
   },
   pickerStyle: {
     marginTop: 0,
     paddingTop: 5,
-    paddingBottom: 5
-  }
+    paddingBottom: 5,
+  },
 });

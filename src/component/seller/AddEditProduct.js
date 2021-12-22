@@ -18,6 +18,7 @@ import { showErrorToast, showSuccessToast } from "../../utility/Helper";
 import SellerLinkedProduct from "./SellerLinkedProduct";
 import { strings } from "../../localize_constant/I18";
 import SellerAttribute from "./SellerAttributes";
+import Auction from "./Auction.js";
 
 export default class AddEditProduct extends React.Component {
   sellerId = 0;
@@ -79,6 +80,10 @@ export default class AddEditProduct extends React.Component {
         }
       }
     });
+  };
+  _getAuctionInformation = (auctionInfo) => {
+    this._getAuctionInformation = auctionInfo;
+    console.log("AuctionInfo", auctionInfo);
   };
   _getProductInformation = (productInfo) => {
     this.productInfomation = productInfo;
@@ -489,7 +494,14 @@ export default class AddEditProduct extends React.Component {
                   textStyle={styles.textStyle}
                   activeTextStyle={styles.activeTextStyle}
                 >
-                  <Text>Auction</Text>
+                  <Auction
+                    stockStatusOptions={this.state.response.stock_options}
+                    getInfoProductData={this._getAuctionInformation.bind(this)}
+                    stock_quantity={this.state.response.stock_quantity}
+                    stock_status={this.state.response.stock_status}
+                    manage_stock={this.state.response.manage_stock}
+                    isGetProductInfoData={this.state.isGetProductInfoData}
+                  />
                 </Tab>
               </Tabs>
             )}
