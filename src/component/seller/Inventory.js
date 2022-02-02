@@ -201,12 +201,19 @@ export default class Inventory extends React.Component {
               onValueChange={this._selectBackOrder.bind(this)}
               style={styles.pickerStyle}
             >
-              {this.state.backorderOptions.map((option, i) => {
+              {/*{this.state.backorderOptions.map((option, i) => {
 
                 return (
                   <Picker.Item key={i} value={option} label={option.title} />
                 );
-              })}
+              })}*/}
+              {this.state.backorderOptions
+                .filter((option) => option.id === "no" || option.id === "yes")
+                .map((option, i) => {
+                  return (
+                    <Picker.Item key={i} value={option} label={option.title} />
+                  );
+                })}
             </Picker>
           </View>
         ) : null}

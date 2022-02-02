@@ -33,8 +33,8 @@ export default class VideoPlayer extends React.Component {
       <YouTube
         videoId="KVZ-P-ZI6W4" // The YouTube video ID
         apiKey="AIzaSyArdjIDLN8Est7xa6p2NwFrOqnMZ9X9gjw"
-        play // control playback of video with true/false
-        fullscreen // control whether the video should play in fullscreen or inline
+        play={false} // control playback of video with true/false
+        //fullscreen // control whether the video should play in fullscreen or inline
         loop // control whether the video should loop when ended
         onReady={(e) => this.setState({ isReady: true })}
         onChangeState={(e) => this.setState({ status: e.state })}

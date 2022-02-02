@@ -238,9 +238,10 @@ export default class ProductPage extends React.Component {
 
   _onPressAddToCart = isBuyNow => {
 
-    if (this.state.product.seller_id == this.userId) {
-      showErrorToast("you can't add to cart or buy your own products.")
-    } else {
+    // if (this.state.product.seller_id == this.userId) {
+    //   showErrorToast("you can't add to cart or buy your own products.")
+    // } 
+
       if (
         this.state.product.product_type !== 'simple' &&
         this.state.product.attributes &&
@@ -350,7 +351,7 @@ export default class ProductPage extends React.Component {
           }
         });
       }
-    }
+    
 
 
 
@@ -1207,7 +1208,7 @@ export default class ProductPage extends React.Component {
                       </ScrollView>
                     </View>
 
-                    {this.state.product.product_type != 'external' ? (
+                    {this.state.product.product_type != 'external' && this.state.product.seller_id != this.userId ? (
                       <View
                         style={[{
                           flexDirection: 'row',

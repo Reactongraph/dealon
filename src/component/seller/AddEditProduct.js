@@ -316,6 +316,7 @@ export default class AddEditProduct extends React.Component {
     this.props.navigation.pop();
   };
   render() {
+  	console.log("response>>>>>>response",this.state.response)
     return (
       <Container>
         <CustomActionbar

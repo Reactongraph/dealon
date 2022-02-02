@@ -980,7 +980,7 @@ export default class FilterProduct extends React.Component {
                                                     }}
 
                                                 /> : null}
-                                                <View style={{ flexDirection: 'row' }}>
+                                                <View style={{ flexDirection: 'row', marginBottom: 50 }}>
 
                                                     <TouchableOpacity
                                                         style={styles.uploadButtonContainercan}

@@ -185,6 +185,7 @@ export default class SearchProductPage extends React.Component {
   };
 
   render() {
+  	console.log("dgfdgdfg>>>>>",this.state.searchItems)
     return (
       <View style={{ paddingTop: -22 }} keyboardShouldPersistTaps="always">
         <Header
@@ -230,7 +231,7 @@ export default class SearchProductPage extends React.Component {
         </Header>
         <FlatList
           keyboardShouldPersistTaps="always"
-          data={this.state.searchItems}
+          data={this.state.searchItems.splice(0,3)}
           renderItem={(item) => {
             return (
               <TouchableOpacity

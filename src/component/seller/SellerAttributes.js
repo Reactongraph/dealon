@@ -226,7 +226,8 @@ export default class SellerAttributes extends React.Component {
 
 
         const groupedPeople = this.groupBy(this.state.selectattribut, "parent_name");
-        console.log(groupedPeople);
+        console.log("groupedPeople>>>",groupedPeople);
+        console.log("beforegroupedPeople>>",this.state.selectattribut)
 
 
         for (let i = 0; i < this.state.selectparentname.length; i++) {
@@ -674,7 +675,8 @@ export default class SellerAttributes extends React.Component {
         });
 
 
-
+		console.log("this.state.selectattribut",this.state.selectattribut)
+		console.log("dhgdgfhfgfh,this.props.selectedAttribute",this.props.selectedAttribute)
         return (
             <View style={styles.container}>
 
