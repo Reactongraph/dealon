@@ -84,6 +84,7 @@ export default class ApplyShipping extends React.Component {
   };
 
   render() {
+  	console.log("dispatchedIndispatchedIn",this.state.dispatchedIn)
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.headingTextStyle}>{strings("WEIGHT")}</Text>
@@ -187,16 +188,16 @@ export default class ApplyShipping extends React.Component {
             label="Select Dispatch Days"
             value="Select Dispatch Days"
           />
-          <Picker.Item label="1 Days" value="1 Days" />
-          <Picker.Item label="2 Days" value="2 Days" />
-          <Picker.Item label="3 Days" value="3 Days" />
-          <Picker.Item label="4 Days" value="4 Days" />
-          <Picker.Item label="5 Days" value="5 Days" />
-          <Picker.Item label="6 Days" value="6 Days" />
-          <Picker.Item label="7 Days" value="7 Days" />
-          <Picker.Item label="8 Days" value="8 Days" />
-          <Picker.Item label="9 Days" value="9 Days" />
-          <Picker.Item label="10 Days" value="10 Days" />
+          <Picker.Item label="1 Days" value="1" />
+          <Picker.Item label="2 Days" value="2" />
+          <Picker.Item label="3 Days" value="3" />
+          <Picker.Item label="4 Days" value="4" />
+          <Picker.Item label="5 Days" value="5" />
+          <Picker.Item label="6 Days" value="6" />
+          <Picker.Item label="7 Days" value="7" />
+          <Picker.Item label="8 Days" value="8" />
+          <Picker.Item label="9 Days" value="9" />
+          <Picker.Item label="10 Days" value="10" />
         </Picker>
 
         <Text style={styles.headingTextStyle}>
