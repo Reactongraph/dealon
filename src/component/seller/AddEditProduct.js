@@ -59,6 +59,7 @@ export default class AddEditProduct extends React.Component {
       this.productId +
       "/?seller_id=" +
       this.sellerId;
+      console.log("edit product get api",url)
     fetchDataFromAPI(url, "GET", "", null).then((response) => {
       if (isInComponent) {
         if (response && response.success != false) {
@@ -291,6 +292,8 @@ export default class AddEditProduct extends React.Component {
           product_url: product_url,
           button_text: button_text,
           grouped_products: grouped_products,
+          product_shipping_days: "8",
+          rh_product_video: "myproduct url"
         });
         let url =
           AppConstant.BASE_URL +

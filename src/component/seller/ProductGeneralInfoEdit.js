@@ -641,20 +641,6 @@ export default class ProductGeneralInfoEdit extends React.Component {
             </View>
 
             <Text style={styles.headingTextStyle}>
-              {strings("PRODUCT_VIDEO")}
-            </Text>
-            <TextInput
-              style={ViewStyle.inputTextStyle}
-              autoCapitalize="none"
-              value={this.state.productVideo}
-              // onChangeText={(text) => {
-              //   this.setState({productVideo: onlyDigitText(text) });
-              // }}
-              returnKeyType="next"
-              placeholder={strings("PRODUCT_VIDEO")}
-            />
-
-            <Text style={styles.headingTextStyle}>
               {strings("PRODUCT_SKU")}
             </Text>
             <View style={ViewStyle.passInputViewStyle}>

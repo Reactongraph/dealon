@@ -4,7 +4,8 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import { Picker, CheckBox, Icon } from "native-base";
 import StringConstant from "../../app_constant/StringConstant";
@@ -30,7 +31,8 @@ export default class ProductStatus extends React.Component {
     imageType: 0,
     status: [],
     images: [],
-    newImages: []
+    newImages: [],
+    productVideo:"",
   };
   componentDidMount() {
     this.setState(
@@ -185,6 +187,7 @@ export default class ProductStatus extends React.Component {
     );
   };
   render() {
+  	console.log("this.state.productVideothis.state.productVideo",this.state.productVideo)
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -328,6 +331,19 @@ export default class ProductStatus extends React.Component {
               ListEmptyComponent={
                 <Text>{strings("NO_IMAGES_ADD_YET")}</Text>
               }
+            />
+            <Text style={styles.headingTextStyle}>
+              {strings("PRODUCT_VIDEO")}
+            </Text>
+            <TextInput
+              style={ViewStyle.inputTextStyle}
+              autoCapitalize="none"
+              value={this.state.productVideo}
+              onChangeText={(text) => {
+                this.setState({productVideo: text });
+              }}
+              returnKeyType="next"
+              placeholder={strings("PRODUCT_VIDEO")}
             />
           </View>
         </ScrollView>
