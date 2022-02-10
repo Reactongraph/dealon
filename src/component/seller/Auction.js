@@ -13,7 +13,7 @@ import _ from "lodash";
 import { ScrollView } from "react-native";
 import { strings } from "../../localize_constant/I18";
 import { onlyDigitText } from "../../utility/UtilityConstant";
-// import DatePicker from "react-native-datepicker";
+import DatePicker from "react-native-datepicker";
 // import { TimePicker } from "react-native-simple-time-picker";
 
 export default class Auction extends React.Component {
@@ -23,13 +23,15 @@ export default class Auction extends React.Component {
     startingPrice: "",
     reservePrice: "",
     startAuctionTime: "",
-    stopAuctionTime: new Date(),
+    stopAuctionTime: "",
     numberOfDays: "",
     minimumQuantity: "",
     maximumQuantity: "",
     date: "",
     incrementStatus: "",
     automaticeStatus: "",
+
+   	//unused
     selectedMinutes: 0,
     selectedHours: 0,
 
@@ -51,6 +53,37 @@ export default class Auction extends React.Component {
         isEnableBackOrder: this.props.manage_stock,
         stockQuantity: this.props.stock_quantity
           ? this.props.stock_quantity + ""
+          : "",
+
+        productName: this.props.productName
+          ? this.props.productName
+          : "",
+        auctionStatus: this.props.auctionStatus
+          ? this.props.auctionStatus
+          : "",
+        startingPrice: this.props.startingPrice
+          ? this.props.startingPrice
+          : "",
+        reservePrice: this.props.reservePrice
+          ? this.props.reservePrice
+          : "",
+        startAuctionTime: this.props.startAuctionTime
+          ? this.props.startAuctionTime
+          : "",
+        stopAuctionTime: this.props.stopAuctionTime
+          ? this.props.stopAuctionTime
+          : "",
+        numberOfDays: this.props.numberOfDays
+          ? this.props.numberOfDays
+          : "",
+        minimumQuantity: this.props.minimumQuantity
+          ? this.props.minimumQuantity
+          : "",
+        maximumQuantity: this.props.maximumQuantity
+          ? this.props.maximumQuantity
+          : "",
+        incrementStatus: this.props.incrementStatus
+          ? this.props.incrementStatus
           : "",
       },
       () => this.updateinfoData()
@@ -74,6 +107,37 @@ export default class Auction extends React.Component {
           : [],
         isEnableBackOrder: newProps.manage_stock,
         stockQuantity: newProps.stock_quantity + "",
+
+        productName: newProps.productName
+          ? newProps.productName
+          : "",
+        auctionStatus: newProps.auctionStatus
+          ? newProps.auctionStatus
+          : "",
+        startingPrice: newProps.startingPrice
+          ? newProps.startingPrice
+          : "",
+        reservePrice: newProps.reservePrice
+          ? newProps.reservePrice
+          : "",
+        startAuctionTime: newProps.startAuctionTime
+          ? newProps.startAuctionTime
+          : "",
+        stopAuctionTime: newProps.stopAuctionTime
+          ? newProps.stopAuctionTime
+          : "",
+        numberOfDays: newProps.numberOfDays
+          ? newProps.numberOfDays
+          : "",
+        minimumQuantity: newProps.minimumQuantity
+          ? newProps.minimumQuantity
+          : "",
+        maximumQuantity: newProps.maximumQuantity
+          ? newProps.maximumQuantity
+          : "",
+        incrementStatus: newProps.incrementStatus
+          ? newProps.incrementStatus
+          : "",
       });
       this.updateStockStatusOption(
         newProps.stockStatusOptions,
@@ -155,6 +219,15 @@ export default class Auction extends React.Component {
 
   render() {
     const { date } = this.state;
+    // console.log("this.state.startingPrice>>>",this.state.startingPrice)
+    // console.log("this.state.reservePrice>>>",this.state.reservePrice)
+    // console.log("this.state.startAuctionTime>>>",this.state.startAuctionTime)
+    // console.log("this.state.stopAuctionTime>>>",this.state.stopAuctionTime)
+    // console.log("this.state.numberOfDays>>>",this.state.numberOfDays)
+    // console.log("this.state.minimumQuantity>>>",this.state.minimumQuantity)
+    // console.log("this.state.maximumQuantity>>>",this.state.maximumQuantity)
+    // console.log("this.state.incrementStatus>>>",this.state.incrementStatus)
+    // console.log("this.state.automaticeStatus>>>",this.state.automaticeStatus)
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.headingTextStyle}>{strings("AUCTION_STATUS")}</Text>
@@ -162,11 +235,12 @@ export default class Auction extends React.Component {
           mode="dropdown"
           iosIcon={<Icon name="arrow-down" />}
           selectedValue={this.state.auctionStatus}
-          onValueChange={(value) =>
+          onValueChange={(value) =>{
             this.setState({
               auctionStatus: value,
-            })
-          }
+            },
+      			() => this.updateinfoData())
+          }}
           style={styles.pickerStyle}
         >
           <Picker.Item label="Select" value="Unknown" />
@@ -183,9 +257,10 @@ export default class Auction extends React.Component {
             autoCapitalize="none"
             autoCorrect={false}
             value={this.state.productName}
-            onChangeText={(text) => {
-              this.setState({ productName: text }, () => this.updateinfoData());
-            }}
+            // onChangeText={(text) => {
+            //   this.setState({ productName: text }, () => this.updateinfoData());
+            // }}
+            editable={false}
             keyboardType="default"
             returnKeyType="next"
           />
@@ -230,13 +305,13 @@ export default class Auction extends React.Component {
             {strings("START_AUCTION_TIME")}
           </Text>
 
-          {/*<DatePicker
+          <DatePicker
             // style={ViewStyle.date}
             style={{ width: 400 }}
             date={this.state.startAuctionTime}
-            mode="date"
+            mode="datetime"
             placeholder="Enter auction starting time"
-            format="YYYY-MM-DD"
+            format="YYYY-MM-DD, h:mm:ss"
             minDate="2001-05-01"
             maxDate="2050-06-01"
             confirmBtnText="Confirm"
@@ -255,17 +330,43 @@ export default class Auction extends React.Component {
             onDateChange={(value) => {
               this.setState({
                 startAuctionTime: value,
-              });
+              },
+      				() => this.updateinfoData());
             }}
-          />*/}
+          />
 
           <Text style={styles.headingTextStyle}>
             {strings("STOP_AUCTION_TIME")}
           </Text>
-          <Text>
-            Selected Time: {this.state.selectedHours}:
-            {this.state.selectedMinutes}
-          </Text>
+          <DatePicker
+            // style={ViewStyle.date}
+            style={{ width: 400 }}
+            date={this.state.stopAuctionTime}
+            mode="datetime"
+            placeholder="Enter auction stop time"
+            format="YYYY-MM-DD, h:mm:ss"
+            minDate="2001-05-01"
+            maxDate="2050-06-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            showTimeSelect
+            //dateFormat="MMMM d, yyyy h:mm aa"
+            customStyles={{
+              dateIcon: {
+                // position: "absolute",
+                left: 0,
+                top: 4,
+                marginLeft: 0,
+              },
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={(value) => {
+              this.setState({
+                stopAuctionTime: value,
+              },
+      				() => this.updateinfoData());
+            }}
+          />
           <View>
             {/*<TimePicker
               selectedHours={this.state.selectedHours}
@@ -365,7 +466,8 @@ export default class Auction extends React.Component {
             onValueChange={(value) =>
               this.setState({
                 incrementStatus: value,
-              })
+              },
+      				() => this.updateinfoData())
             }
             style={styles.pickerStyle}
           >
@@ -384,7 +486,8 @@ export default class Auction extends React.Component {
             onValueChange={(value) =>
               this.setState({
                 automaticeStatus: value,
-              })
+              },
+      				() => this.updateinfoData())
             }
             style={styles.pickerStyle}
           >
@@ -393,13 +496,7 @@ export default class Auction extends React.Component {
             <Picker.Item label="Disabled" value="Disabled" />
           </Picker>
         </View>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          // onPress={() => this.SubmitData()}
-          activeOpacity={1}
-        >
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity></> : null
+        </> : null
       	}
       </ScrollView>
     );

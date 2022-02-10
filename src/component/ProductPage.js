@@ -70,7 +70,7 @@ export default class ProductPage extends React.Component {
     return (
       <PagerDotIndicator
         pageCount={
-          this.state.banners.length > 1 ? this.state.banners.length + 1 : 0
+          this.state.banners.length >= 1 ? this.state.banners.length + (this.state.product.rh_product_video ? 1 : null) : 0
         }
         dotStyle={{
           width: 6,
@@ -599,6 +599,7 @@ export default class ProductPage extends React.Component {
   render() {
     const globalTextStyle = localizeStyle(localeObject.isRTL).GlobalTextView;
     const globleViewStyle = localizeStyle(localeObject.isRTL).GlobalView;
+    console.log("productproductproduct",this.state.product)
     return (
       <View
         style={ViewStyle.mainContainer}>
@@ -691,7 +692,9 @@ export default class ProductPage extends React.Component {
                               </View>
                             );
                           })}
-                          <VideoPlayer />
+                          {this.state.product.rh_product_video ?
+                          	<VideoPlayer productVideourl={this.state.product.rh_product_video} /> : null
+                          }
                         </IndicatorViewPager>
                         <View style={[styles.productViewStyle, { marginTop: 0 }]}>
                           <Text

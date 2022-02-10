@@ -19,6 +19,7 @@
     "react-native": "0.61.5",
     "react-native-camera": "^3.3.2",
     "react-native-cardview": "^2.0.3",
+    "react-native-datepicker": "^1.7.2",
     "react-native-deep-linking": "^2.2.0",
     "react-native-device-info": "^5.5.1",
     "react-native-elements": "^1.0.0-beta7",

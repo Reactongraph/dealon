@@ -176,7 +176,7 @@ export default {
   PRODUCT_THUMBNAIL: "Product Thumbnail",
   PRODUCT_SKU: "Product MPN",
   SKU_VALIDATION_ERROR: "Please validate MPN",
-  PRODUCT_VIDEO: "Product Video",
+  PRODUCT_VIDEO: "Enter your youtube videoID ex.0-S5a0eXPoc",
   REGULAR_PRICE: "Regular Price",
   SALE_PRICE: "Sale Price",
   PRODUCT_SHORT_DESCRIPTION: "DETAIL",

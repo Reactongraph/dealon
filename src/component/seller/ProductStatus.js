@@ -38,7 +38,8 @@ export default class ProductStatus extends React.Component {
     this.setState(
       {
         images: this.props.galleryImages,
-        status: this.props.statusOption
+        status: this.props.statusOption,
+        productVideo: this.props.productVideo,
       },
       () => this.updateinfoData()
     );
@@ -52,7 +53,8 @@ export default class ProductStatus extends React.Component {
       this.setState(
         {
           images: this.props.galleryImages,
-          status: this.props.statusOption
+          status: this.props.statusOption,
+          productVideo: this.props.productVideo,
         },
         () => this.updateinfoData()
       );
@@ -333,14 +335,16 @@ export default class ProductStatus extends React.Component {
               }
             />
             <Text style={styles.headingTextStyle}>
-              {strings("PRODUCT_VIDEO")}
+              Youtube video
             </Text>
             <TextInput
               style={ViewStyle.inputTextStyle}
               autoCapitalize="none"
               value={this.state.productVideo}
               onChangeText={(text) => {
-                this.setState({productVideo: text });
+                this.setState({productVideo: text },
+      					() => this.updateinfoData()
+                );
               }}
               returnKeyType="next"
               placeholder={strings("PRODUCT_VIDEO")}

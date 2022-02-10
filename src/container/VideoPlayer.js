@@ -29,9 +29,10 @@ export default class VideoPlayer extends React.Component {
   }
 
   render() {
+  	console.log("productVideourlproductVideourl",this.props.productVideourl)
     return (
       <YouTube
-        videoId="KVZ-P-ZI6W4" // The YouTube video ID
+        videoId={this.props.productVideourl} // The YouTube video ID
         apiKey="AIzaSyArdjIDLN8Est7xa6p2NwFrOqnMZ9X9gjw"
         play={false} // control playback of video with true/false
         //fullscreen // control whether the video should play in fullscreen or inline

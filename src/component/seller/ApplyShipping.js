@@ -16,7 +16,7 @@ export default class ApplyShipping extends React.Component {
     selectedShippingClass: {},
     dispatchedIn: "",
     selectedShippingMethod: "",
-    shippingMethod: [{ id: "0", title: strings("SELECT_SHIPPING_METHOD") }],
+    //shippingMethod: [{ id: "0", title: strings("SELECT_SHIPPING_METHOD") }],
   };
 
   updateinfoData = () => {
@@ -31,6 +31,8 @@ export default class ApplyShipping extends React.Component {
             ? this.props.shippingInfo
             : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
         weight: this.props.weight ? this.props.weight : "",
+        dispatchedIn: this.props.dispatchedIn ? this.props.dispatchedIn : "",
+        selectedShippingMethod: this.props.selectedShippingMethod ? this.props.selectedShippingMethod : "",
         width: this.props.width ? this.props.width : "",
         length: this.props.length ? this.props.length : "",
         height: this.props.height ? this.props.height : "",
@@ -52,6 +54,8 @@ export default class ApplyShipping extends React.Component {
               ? newProps.shippingInfo
               : [{ id: "0", title: strings("NO_SHIPPING_CALSS") }],
           weight: newProps.weight ? newProps.weight : "",
+          dispatchedIn: newProps.dispatchedIn ? newProps.dispatchedIn : "",
+          selectedShippingMethod: newProps.selectedShippingMethod ? newProps.selectedShippingMethod : "",
           width: newProps.width ? newProps.width : "",
           length: newProps.length ? newProps.length : "",
           height: newProps.height ? newProps.height : "",
@@ -84,7 +88,6 @@ export default class ApplyShipping extends React.Component {
   };
 
   render() {
-  	console.log("dispatchedIndispatchedIn",this.state.dispatchedIn)
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.headingTextStyle}>{strings("WEIGHT")}</Text>
@@ -177,11 +180,15 @@ export default class ApplyShipping extends React.Component {
           mode="dropdown"
           iosIcon={<Icon name="arrow-down" />}
           selectedValue={this.state.dispatchedIn}
-          onValueChange={(value) =>
-            this.setState({
-              dispatchedIn: value,
-            })
-          }
+          onValueChange={(value) => {
+            this.setState({ dispatchedIn: value},
+      		() => this.updateinfoData())
+         	}}
+          // onChangeText={(text) => {
+          //   this.setState({ height: onlyDigitText(text) }, () =>
+          //     this.updateinfoData()
+          //   );
+          // }}
           style={styles.pickerStyle}
         >
           <Picker.Item
@@ -208,10 +215,13 @@ export default class ApplyShipping extends React.Component {
           iosIcon={<Icon name="arrow-down" />}
           placeholder={strings("SHIPPING_METHOD")}
           selectedValue={this.state.selectedShippingMethod}
-          // onValueChange={this._selectShippingClass.bind(this)}
+          onValueChange={(value) => {
+            this.setState({ selectedShippingMethod: value},
+      		() => this.updateinfoData())
+         	}}
           style={styles.pickerStyle}
         >
-          {this.state.shippingMethod.map((shippingMethod, i) => {
+          {/*{this.state.shippingMethod.map((shippingMethod, i) => {
             return (
               <Picker.Item
                 key={i}
@@ -219,7 +229,13 @@ export default class ApplyShipping extends React.Component {
                 label={shippingMethod.title}
               />
             );
-          })}
+          })}*/}
+          <Picker.Item
+            label="Select Shipping Method"
+            value="Select Shipping Method"
+          />
+          <Picker.Item label="Free Shipping" value="Free Shipping" />
+          <Picker.Item label="Local Pickup Shipping" value="Local Pickup Shipping" />
         </Picker>
       </ScrollView>
     );

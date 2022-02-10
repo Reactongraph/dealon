@@ -355,10 +355,10 @@ export default class NewProductInformationEdit extends React.Component {
               </View>
             </View>
 
-            <Text style={styles.headingTextStyle}>
+            {/*<Text style={styles.headingTextStyle}>
               {strings("PRODUCT_VIDEO")}
-            </Text>
-            <TextInput
+            </Text>*/}
+            {/*<TextInput
               style={ViewStyle.inputTextStyle}
               autoCapitalize="none"
               value={this.state.productVideo}
@@ -369,7 +369,7 @@ export default class NewProductInformationEdit extends React.Component {
               // }}
               returnKeyType="next"
               placeholder={strings("PRODUCT_VIDEO")}
-            />
+            />*/}
 
             <Text style={styles.headingTextStyle}>
               {strings("PRODUCT_SKU")}

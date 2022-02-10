@@ -173,7 +173,7 @@
   "ABOUT_PRODUCT": "About Product",
   "PRODUCT_THUMBNAIL": "Product Thumbnail",
   "PRODUCT_SKU": "Product MPN",
-  "PRODUCT_VIDEO": "Product Video",
+  "PRODUCT_VIDEO": "Enter your youtube videoID ex.0-S5a0eXPoc",
   "SKU_VALIDATION_ERROR": "Please validate MPN",
   "REGULAR_PRICE": "Regular Price",
   "SALE_PRICE": "Sale Price",

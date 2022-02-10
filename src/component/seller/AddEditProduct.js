@@ -59,7 +59,7 @@ export default class AddEditProduct extends React.Component {
       this.productId +
       "/?seller_id=" +
       this.sellerId;
-      console.log("edit product get api",url)
+      // console.log("edit product get api",url)
     fetchDataFromAPI(url, "GET", "", null).then((response) => {
       if (isInComponent) {
         if (response && response.success != false) {
@@ -83,8 +83,8 @@ export default class AddEditProduct extends React.Component {
     });
   };
   _getAuctionInformation = (auctionInfo) => {
-    this._getAuctionInformation = auctionInfo;
-    console.log("AuctionInfo", auctionInfo);
+    this.AuctionInformation = auctionInfo;
+    // console.log("AuctionInfo", auctionInfo);
   };
   _getProductInformation = (productInfo) => {
     this.productInfomation = productInfo;
@@ -100,11 +100,11 @@ export default class AddEditProduct extends React.Component {
   };
   _getproductStatusInformation = (statusInfo) => {
     this.productStatusInformation = statusInfo;
-    // console.log("statusInfo", statusInfo);
+    //console.log("statusInfoproductStatusInformation>>>", statusInfo);
   };
   _getproductShippingInfo = (shippingInfo) => {
     this.shippingInfomation = shippingInfo;
-    // console.log("shippingInfomation", shippingInfo);
+    console.log("shippingInfomation>>>>", shippingInfo);
   };
   _getLinkProductInfo = (linkProductInfo) => {
     this.linkedProductInfomation = linkProductInfo;
@@ -124,6 +124,20 @@ export default class AddEditProduct extends React.Component {
     console.log("Attribute", this.attributeProductInfomation);
 
     let product = this.state.response;
+    //// auction data /////
+    let AuctionInformation = this.AuctionInformation
+      ? this.AuctionInformation.response
+      : null;
+    let auctionStatus = AuctionInformation ? AuctionInformation.auctionStatus : null
+    let startingPrice = AuctionInformation ? AuctionInformation.startingPrice : null
+    let reservePrice = AuctionInformation ? AuctionInformation.reservePrice : null
+    let startAuctionTime = AuctionInformation ? AuctionInformation.startAuctionTime : null
+    let stopAuctionTime = AuctionInformation ? AuctionInformation.stopAuctionTime : null
+    let numberOfDays = AuctionInformation ? AuctionInformation.numberOfDays : null
+    let minimumQuantity = AuctionInformation ? AuctionInformation.minimumQuantity : null
+    let maximumQuantity = AuctionInformation ? AuctionInformation.maximumQuantity : null
+    let incrementStatus = AuctionInformation ? AuctionInformation.incrementStatus : null
+    let automaticeStatus = AuctionInformation ? AuctionInformation.automaticeStatus : null
 
     /////// Product Info Data //////////
     let productInfomation = this.productInfomation
@@ -168,6 +182,9 @@ export default class AddEditProduct extends React.Component {
     let statusInfo = this.productStatusInformation
       ? this.productStatusInformation.response
       : null;
+    let productVideo = this.productStatusInformation
+      ? this.productStatusInformation.response.productVideo
+      : null; 
     let productStatus =
       statusInfo && statusInfo.selectedStatus && statusInfo.selectedStatus.id
         ? statusInfo.selectedStatus.id
@@ -214,6 +231,8 @@ export default class AddEditProduct extends React.Component {
     let shippingInfo = this.shippingInfomation
       ? this.shippingInfomation.response
       : null;
+    let dispatchedIn = shippingInfo ? shippingInfo.dispatchedIn : product.dispatchedIn;
+    let selectedShippingMethod = shippingInfo ? shippingInfo.selectedShippingMethod : product.selectedShippingMethod;
     let weight = shippingInfo ? shippingInfo.weight : product.weight;
     let length = shippingInfo ? shippingInfo.length : product.length;
     let width = shippingInfo ? shippingInfo.width : product.width;
@@ -292,8 +311,19 @@ export default class AddEditProduct extends React.Component {
           product_url: product_url,
           button_text: button_text,
           grouped_products: grouped_products,
-          product_shipping_days: "8",
-          rh_product_video: "myproduct url"
+          product_shipping_days: dispatchedIn,
+          _shipping_method_cust: selectedShippingMethod,
+          rh_product_video: productVideo,
+          mp_auction_status: auctionStatus,
+          auction_starting_price: startingPrice,
+          auction_reserve_price: reservePrice,
+          auction_start_time: startAuctionTime,
+          auction_stop_time: stopAuctionTime,
+          coupon_time: numberOfDays,
+          min_auction_product_qty: minimumQuantity,
+          max_auction_product_qty: maximumQuantity,
+          product_increament_auction_option: incrementStatus,
+          product_automatic_auction_option: automaticeStatus,
         });
         let url =
           AppConstant.BASE_URL +
@@ -417,6 +447,7 @@ export default class AddEditProduct extends React.Component {
                     <ApplyShipping
                       shippingInfo={this.state.response.shipping_classes}
                       weight={this.state.response.weight}
+                      dispatchedIn={this.state.response.product_shipping_days}
                       width={this.state.response.width}
                       length={this.state.response.length}
                       height={this.state.response.height}
@@ -425,6 +456,7 @@ export default class AddEditProduct extends React.Component {
                         this
                       )}
                       isGetProductInfoData={this.state.isGetProductInfoData}
+                      selectedShippingMethod={this.state.response._shipping_method_cust}
                     />
                   </Tab>
                 ) : null}
@@ -487,6 +519,7 @@ export default class AddEditProduct extends React.Component {
                       this
                     )}
                     statusValue={this.state.response.status}
+                    productVideo={this.state.response.rh_product_video}
                     isGetProductInfoData={this.state.isGetProductInfoData}
                   />
                 </Tab>
@@ -505,6 +538,18 @@ export default class AddEditProduct extends React.Component {
                     stock_status={this.state.response.stock_status}
                     manage_stock={this.state.response.manage_stock}
                     isGetProductInfoData={this.state.isGetProductInfoData}
+
+                    productName={this.state.response.name}
+                    auctionStatus={this.state.response.mp_auction_status}
+                    startingPrice={this.state.response.auction_starting_price}
+                    reservePrice={this.state.response.auction_reserve_price}
+								    startAuctionTime={this.state.response.auction_start_time}
+								    stopAuctionTime={this.state.response.auction_stop_time}
+								    numberOfDays={this.state.response.coupon_time}
+								    minimumQuantity={this.state.response.min_auction_product_qty}
+								    maximumQuantity={this.state.response.max_auction_product_qty}
+								    //date={this.state.response.}
+								    incrementStatus={this.state.response.product_increament_auction_option}
                   />
                 </Tab>
               </Tabs>
