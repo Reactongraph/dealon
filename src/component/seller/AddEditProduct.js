@@ -550,6 +550,7 @@ export default class AddEditProduct extends React.Component {
 								    maximumQuantity={this.state.response.max_auction_product_qty}
 								    //date={this.state.response.}
 								    incrementStatus={this.state.response.product_increament_auction_option}
+								    automaticeStatus={this.state.response.product_automatic_auction_option}
                   />
                 </Tab>
               </Tabs>

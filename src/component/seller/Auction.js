@@ -85,6 +85,9 @@ export default class Auction extends React.Component {
         incrementStatus: this.props.incrementStatus
           ? this.props.incrementStatus
           : "",
+        automaticeStatus: this.props.automaticeStatus
+          ? this.props.automaticeStatus
+          : "",
       },
       () => this.updateinfoData()
     );
@@ -137,6 +140,9 @@ export default class Auction extends React.Component {
           : "",
         incrementStatus: newProps.incrementStatus
           ? newProps.incrementStatus
+          : "",
+        automaticeStatus: newProps.automaticeStatus
+          ? newProps.automaticeStatus
           : "",
       });
       this.updateStockStatusOption(
